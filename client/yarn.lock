@@ -7470,6 +7470,11 @@
     "lodash" "^4.17.20"
     "renderkid" "^2.0.4"
 
+"primeflex@^2.0.0":
+  "integrity" "sha512-t6AG3iRI1rh04uI+9nC4JSlbKfA8PnpRDFtjyqi3rDSLRgdfOuhIiunJbjVQ4alnnCfuQAAbVyde1AKN9QxT/w=="
+  "resolved" "https://registry.npmjs.org/primeflex/-/primeflex-2.0.0.tgz"
+  "version" "2.0.0"
+
 "primeicons@^5.0.0":
   "integrity" "sha512-heygWF0X5HFI1otlZE62pp6ye7sZ8om78J9au2BRkg8O7Y8AHTZ9qKMRzchZUHLe8zUAvdi6hZzzm9XxgwIExw=="
   "resolved" "https://registry.npmjs.org/primeicons/-/primeicons-5.0.0.tgz"

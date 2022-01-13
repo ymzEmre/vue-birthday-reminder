@@ -16,12 +16,13 @@ const user = ref({
   password: null,
 });
 
-/* eslint-disable no-unused-vars */
 const login = async () => {
   await appAxios
     .post("/users/login", user.value)
     .then((res) => {
       store.commit("setUser", res.data.name);
+      toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Logined", life: 3000 });
+
       localStorage.setItem("access_token", res.data.tokens.access_token);
       router.push({ name: "Home" });
     })

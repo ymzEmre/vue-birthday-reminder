@@ -30,9 +30,6 @@ const updatedata = ref({
 });
 
 const currentUser = store.getters._getCurrentUser;
-onMounted(() => {
-  toast.add({ severity: "success", summary: `${currentUser} Welcome`, detail: "Logined", life: 3000 });
-});
 
 const selectedCity = ref();
 const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
@@ -114,55 +111,74 @@ const confirm2 = (event, id) => {
     acceptClass: "p-button-danger",
     accept: () => {
       deleteUser(id);
-      toast.add({ severity: "success", summary: "Confirmed", detail: "Record deleted", life: 3000 });
+      toast.add({ severity: "success", summary: "Confirmed", detail: "Logout", life: 3000 });
     },
   });
 };
+
+// const birthdayCalculator = () => {
+//   const today = moment();
+//   const birthDate = moment("05/02/1998").format("L");
+//   const age = today.diff(birthDate, "years");
+//   const remaing = moment(birthDate)
+//     .add(age + 1, "year")
+//     .calendar();
+//   console.log(moment(remaing).diff(today, "days"));
+// };
+
+// birthdayCalculator();
 </script>
 
 <template>
   <Sidebar visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <h3>{{ currentUser }}</h3>
-    <br />
-    <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
+    <div class="p-grid">
+      <div class="p-col-6">
+        LOGO
+        <h3>{{ currentUser }}</h3>
+        <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
+      </div>
+    </div>
   </Sidebar>
+
   <div class="link">
     <Toast />
+    <div class="p-grid add-new">
+      <Accordion class="content">
+        <AccordionTab header="Add New">
+          <span class="p-float-label">
+            <InputText id="username" type="text" v-model="data.name" />
+            <label for="username">Username</label>
+          </span>
 
-    <span class="p-float-label">
-      <InputText id="username" type="text" v-model="data.name" />
-      <label for="username">Username</label>
-    </span>
+          <div class="p-field p-col-12 p-md-4">
+            <InputMask mask="99/99/9999" v-model="data.birthday" placeholder="__/__/____" slotChar="mm/dd/yyyy" />
+            <label for="date">Date</label>
+          </div>
 
-    <div class="p-field p-col-12 p-md-4">
-      <InputMask mask="99/99/9999" v-model="data.birthday" placeholder="__/__/____" slotChar="mm/dd/yyyy" />
-      <label for="date">Date</label>
+          <Listbox v-model="selectedCity" @input="data.group" :options="cities" optionLabel="name" style="width: 15rem" />
+
+          <Button label="Gonder" @click="onSave"></Button>
+        </AccordionTab>
+      </Accordion>
     </div>
+    <div class="p-grid">
+      <Card class="p-card p-shadow-4" v-for="user in userList" :key="user._id">
+        <template #title>
+          <p>{{ user.name }}</p>
+        </template>
+        <template #content>
+          <p>
+            {{ moment(user.birthday).format("L") }}
+            {{ moment().diff(user.birthday, "years") }}
+          </p>
+          <Tag class="p-mr-2" severity="warning">{{ user.group }}</Tag>
+          <ConfirmPopup></ConfirmPopup>
+          <Button @click="confirm2($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined"></Button>
 
-    <Listbox v-model="selectedCity" @input="data.group" :options="cities" optionLabel="name" style="width: 15rem" />
-
-    <Button label="Gonder" @click="onSave"></Button>
-
-    <Card style="width: 25rem; margin-bottom: 2em" v-for="user in userList" :key="user._id">
-      <template #title>
-        <p>{{ user.name }}</p>
-      </template>
-      <template #content>
-        <p>{{ user.group }}</p>
-        <p>
-          {{ user.birthday }}
-        </p>
-
-        <ConfirmPopup></ConfirmPopup>
-        <Button @click="confirm2($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined"></Button>
-
-        <Button
-          icon="pi pi-user-edit"
-          class="p-button-info p-button-outlined"
-          @click="openModal(user._id, user.name, user.birthday, user.group)"
-        ></Button>
-      </template>
-    </Card>
+          <Button icon="pi pi-user-edit" class="p-button-info p-button-outlined" @click="openModal(user._id, user.name, user.birthday, user.group)"></Button>
+        </template>
+      </Card>
+    </div>
 
     <Dialog header="Header" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
       <span class="p-float-label">
@@ -187,5 +203,20 @@ const confirm2 = (event, id) => {
 <style lang="scss" scoped>
 .link {
   margin-top: $margin-top;
+  margin-left: $margin-left;
+}
+
+.p-card {
+  background-color: #ebebeb;
+  width: 20rem;
+  margin: 2rem 2rem 2rem 2rem;
+}
+
+.add-new {
+  margin-left: 1.5rem;
+}
+
+.content {
+  width: 20rem;
 }
 </style>
