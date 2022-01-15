@@ -2,9 +2,12 @@
 import { ref } from "@vue/reactivity";
 import { inject } from "@vue/runtime-core";
 import { useToast } from "primevue/usetoast";
+import { defineEmits } from "vue";
 
 const toast = useToast();
 const appAxios = inject("appAxios");
+
+defineEmits(["user-email"]);
 
 const registerUserState = ref({
   name: null,

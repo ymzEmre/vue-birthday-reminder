@@ -7,7 +7,7 @@ const createValidation = Joi.object({
 });
 
 const updateValidation = Joi.object({
-  name: Joi.string().min(5),
+  name: Joi.string().min(3).max(50),
   group: Joi.string().max(50),
   birthday: Joi.date(),
 });

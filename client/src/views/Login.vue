@@ -39,31 +39,33 @@ const registeredUserEmail = (val) => {
 <template>
   <Toast />
 
-  <div class="p-field p-col-12 p-md-4 wrapper">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-user"></i>
-      </span>
-      <span class="p-float-label">
-        <InputText id="inputgroup" type="text" v-model="user.email" />
-        <label for="inputgroup">E-Mail</label>
-      </span>
-    </div>
+  <div class="p-d-flex" style="height: 100vh">
+    <div class="p-mr-2 p-as-center">
+      <div class="p-grid wrapper">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-user"></i>
+          </span>
+          <span class="p-float-label">
+            <InputText id="inputgroup" type="text" v-model="user.email" />
+            <label for="inputgroup">E-Mail</label>
+          </span>
+        </div>
 
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-lock"></i>
-      </span>
-      <span class="p-float-label">
-        <Password v-model="user.password" toggleMask :feedback="false"></Password>
-        <label for="inputgroup">Password</label>
-      </span>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-lock"></i>
+          </span>
+          <span class="p-float-label">
+            <Password v-model="user.password" toggleMask :feedback="false"></Password>
+            <label for="inputgroup">Password</label>
+          </span>
+        </div>
+        <Button label="Submit" icon="pi pi-sign-in" @click="login" />
+        <UserRegister @user-email="registeredUserEmail" />
+      </div>
     </div>
   </div>
-
-  <Button label="Submit" icon="pi pi-sign-in" @click="login" />
-
-  <UserRegister @user-email="registeredUserEmail" />
 
   <p>ymzemreyilmaz@gmail.com</p>
   <p>12345678</p>
