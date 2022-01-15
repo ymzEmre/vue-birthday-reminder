@@ -15,9 +15,9 @@ const currentUser = store.getters._getCurrentUser;
 
 <template>
   <Sidebar visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <div class="p-grid">
-      <div class="p-col-6">
-        LOGO
+    <div class="sidebar-top-header">
+      <div>LOGO</div>
+      <div>
         <h3>{{ currentUser }}</h3>
         <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
       </div>
@@ -28,5 +28,10 @@ const currentUser = store.getters._getCurrentUser;
 <style lang="scss">
 .p-sidebar-top {
   height: 5rem !important;
+}
+
+.sidebar-top-header {
+  display: grid !important;
+  grid-template-columns: 1fr 0fr !important;
 }
 </style>

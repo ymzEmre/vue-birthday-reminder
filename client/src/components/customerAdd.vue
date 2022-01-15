@@ -3,6 +3,8 @@ import { reactive } from "@vue/reactivity";
 import { ref } from "@vue/reactivity";
 import { inject } from "@vue/runtime-core";
 import { useToast } from "primevue/usetoast";
+import { defineEmits } from "vue";
+const emit = defineEmits(["emre"]);
 
 const toast = useToast();
 
@@ -18,6 +20,7 @@ const selectedCity = ref();
 const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
 
 const onSave = () => {
+  emit("emre");
   const selectedGroup = selectedCity.value.name;
   appAxios
     .post("/customers", { ...data.value, group: selectedGroup })
