@@ -5,6 +5,8 @@ import customerUpdate from "@/composables/customerUpdate";
 
 const { emit, displayModal, selectedCity, cities, updatedata, openModal, closeModal, updateUser } = customerUpdate();
 
+console.log(emit);
+
 defineProps({ user: Array });
 </script>
 
