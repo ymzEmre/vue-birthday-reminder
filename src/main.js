@@ -3,16 +3,14 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+
 import appAxios from "@/utils/appAxios";
 
 import PrimeVue from "primevue/config";
-
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
-
 import "primeflex/primeflex.css";
-
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import Sidebar from "primevue/sidebar";
@@ -33,6 +31,8 @@ const app = createApp(App);
 app.use(store);
 app.use(router);
 
+app.provide("appAxios", appAxios);
+
 app.use(PrimeVue);
 app.use(ConfirmationService);
 app.use(ToastService);
@@ -49,7 +49,5 @@ app.component("Password", Password);
 app.component("Tag", Tag);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
-
-app.provide("appAxios", appAxios);
 
 app.mount("#app");

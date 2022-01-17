@@ -1,26 +1,15 @@
 <script setup>
-import { ref } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
-import { inject } from "@vue/runtime-core";
-
-import CustomerUpdate from "@/components/customerUpdate";
-import CustomerDelete from "@/components/customerDelete";
+import CustomerUpdate from "@/components/CustomerUpdate";
+import CustomerDelete from "@/components/CustomerDelete";
 import moment from "moment";
 
-const appAxios = inject("appAxios");
-
-const userList = ref([]);
-
-const getUsers = onMounted(() => {
-  appAxios.get("/users/customers").then((res) => {
-    userList.value = res?.data || [];
-  });
-});
+import { defineProps } from "vue";
+defineProps({ user: Object });
 </script>
 
 <template>
   <div class="p-grid">
-    <Card class="p-card p-shadow-4" v-for="user in userList" :key="user._id">
+    <Card class="p-card p-shadow-4">
       <template #title>
         <div class="card-header">
           <div>
