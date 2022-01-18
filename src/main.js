@@ -26,7 +26,8 @@ import Password from "primevue/password";
 import Tag from "primevue/tag";
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-
+import Dropdown from "primevue/dropdown";
+import InputNumber from "primevue/inputnumber";
 const app = createApp(App);
 app.use(store);
 app.use(router);
@@ -49,5 +50,7 @@ app.component("Password", Password);
 app.component("Tag", Tag);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
+app.component("Dropdown", Dropdown);
+app.component("InputNumber", InputNumber);
 
 app.mount("#app");

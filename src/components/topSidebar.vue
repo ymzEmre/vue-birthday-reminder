@@ -11,6 +11,10 @@ const logOut = () => {
 };
 
 const currentUser = store.getters._getCurrentUser;
+
+const accountRoute = () => {
+  router.push({ name: "Account" });
+};
 </script>
 
 <template>
@@ -20,6 +24,7 @@ const currentUser = store.getters._getCurrentUser;
       <div>
         <h3>{{ currentUser }}</h3>
         <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
+        <p @click="accountRoute">Account</p>
       </div>
     </div>
   </Sidebar>

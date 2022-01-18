@@ -4,7 +4,7 @@ import { inject } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
-import UserRegister from "@/components/userRegister";
+import UserRegister from "@/components/UserRegister";
 
 const appAxios = inject("appAxios");
 const store = useStore();
@@ -34,12 +34,36 @@ const login = async () => {
 const registeredUserEmail = (val) => {
   user.value.email = val;
 };
+
+const displayModal = ref(false);
+
+const openModal = () => {
+  displayModal.value = true;
+};
+const closeModal = () => {
+  displayModal.value = false;
+};
+
+const userEmail = ref({
+  email: null,
+});
+
+const forgettenPassword = async () => {
+  await appAxios
+    .post("users/reset-password", userEmail.value)
+    .then(() => {
+      toast.add({ severity: "success", summary: "Password Sent", detail: "Check your email", life: 3000 });
+    })
+    .catch(() => {
+      toast.add({ severity: "error", summary: "Password Sent Failed", detail: "Record deleted", life: 3000 });
+    });
+};
 </script>
 
 <template>
   <Toast />
 
-  <div class="p-d-flex" style="height: 100vh">
+  <div class="p-d-flex wrapper" style="height: 100vh">
     <div class="p-mr-2 p-as-center">
       <div class="p-grid wrapper">
         <div class="p-inputgroup">
@@ -61,18 +85,33 @@ const registeredUserEmail = (val) => {
             <label for="inputgroup">Password</label>
           </span>
         </div>
-        <Button label="Submit" icon="pi pi-sign-in" @click="login" />
+        <Button label="Login" icon="pi pi-sign-in" @click="login" />
         <UserRegister @user-email="registeredUserEmail" />
+        <p @click="openModal">Forgetten Password</p>
       </div>
     </div>
   </div>
 
-  <p>ymzemreyilmaz@gmail.com</p>
-  <p>12345678</p>
-  <p>44504450</p>
+  <Dialog header="Header" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
+    <div class="p-field p-col-12 p-md-4 wrapper">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
+        <span class="p-float-label">
+          <InputText id="inputgroup" type="text" v-model="userEmail.email" />
+          <label for="inputgroup">E-Mail</label>
+        </span>
+      </div>
+    </div>
+    <template #footer>
+      <Button label="No" icon="pi pi-times" @click="closeModal" class="p-button-text" />
+      <Button label="Yes" icon="pi pi-check" autofocus @click="forgettenPassword" />
+    </template>
+  </Dialog>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .wrapper {
   margin-top: 30px;
 }

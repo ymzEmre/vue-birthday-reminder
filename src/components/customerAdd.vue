@@ -47,7 +47,7 @@ const onSave = () => {
         </span>
         <div class="p-field p-col-12 form-customer-birthday">
           <label for="date">Date</label>
-          <InputMask mask="99/99/9999" v-model="data.birthday" placeholder="__/__/____" slotChar="mm/dd/yyyy" />
+          <InputMask mask="9999/99/99" v-model="data.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
         </div>
         <label for="date">Group</label>
         <Listbox class="p-mt-2" v-model="selectedCity" @input="data.group" :options="cities" optionLabel="name" />

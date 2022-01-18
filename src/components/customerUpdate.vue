@@ -25,7 +25,8 @@ defineProps({
       </span>
 
       <div class="p-field p-col-12 p-md-4">
-        <InputMask mask="99/99/9999" v-model="updatedata.birthday" placeholder="__/__/____" slotChar="mm/dd/yyyy" />
+        <InputMask mask="9999/99/99" v-model="updatedata.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
+
         <label for="date">Date</label>
       </div>
 

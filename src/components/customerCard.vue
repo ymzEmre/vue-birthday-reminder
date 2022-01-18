@@ -17,6 +17,15 @@ defineProps({
 
   fetchCustomer: Function,
 });
+
+const remaingDayCalc = (birth) => {
+  const today = moment();
+  const birtday = moment(birth);
+  const age = today.diff(birtday, "years");
+  const remaingDays = birtday.add(age + 1, "years").diff(today, "days");
+
+  return `Remaining Days: ${remaingDays}`;
+};
 </script>
 
 <template>
@@ -35,9 +44,9 @@ defineProps({
       </div>
     </template>
     <template #content>
-      <p>BIRTHDAY: {{ moment(user.birthday).format("L") }}</p>
-      <p>AGE: {{ moment().diff(user.birthday, "years") }}</p>
-      <p>REMAINING DAY: {{ moment().diff(user.birthday, "years") }}</p>
+      <p>Birthday: {{ moment(user.birthday).format("YYYY-MM-DD") }}</p>
+      <p>Age: {{ moment().diff(user.birthday, "years") }}</p>
+      <p v-text="remaingDayCalc(user.birthday)"></p>
     </template>
   </Card>
 </template>

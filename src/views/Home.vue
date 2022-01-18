@@ -40,7 +40,7 @@ fetchCustomer();
   <div class="link">
     <CustomerAdd @customer-add="fetchCustomer" />
     <div class="card-header">
-      <CustomerCard v-for="user in userList" :key="user._id" :user="user" class="p-grid" :fetchCustomer="fetchCustomer" />
+      <CustomerCard v-for="user in userList" :key="user._id" :user="user" class="p-grid" />
     </div>
   </div>
 </template>

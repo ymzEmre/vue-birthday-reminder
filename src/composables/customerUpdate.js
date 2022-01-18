@@ -51,7 +51,7 @@ export default function () {
     updatedata.value = {
       name: userName,
       group: userGroup,
-      birthday: moment(userBirhday).format("L"),
+      birthday: moment(userBirhday).format("YYYY-MM-DD"),
       _id: userId,
     };
     selectedCity.value = { name: userGroup };

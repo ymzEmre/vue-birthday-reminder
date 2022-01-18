@@ -39,7 +39,7 @@ const registerUser = async () => {
 
 <template>
   <Toast />
-  <Button label="Register" icon="pi pi-external-link" @click="openModal" />
+  <Button label="Register" icon="pi pi-user-plus" @click="openModal" />
   <Dialog header="Header" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
     <div class="p-field p-col-12 p-md-4 wrapper">
       <div class="p-inputgroup">
