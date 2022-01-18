@@ -11,25 +11,26 @@ const appAxios = inject("appAxios");
 
 const userList = ref([]);
 
-onMounted(() => {
+const fetchCustomer = onMounted(() => {
   appAxios.get("/users/customers").then((res) => {
     userList.value = res?.data || [];
   });
 });
 
 const groupFilter = (e) => {
+  if (e != null) {
+    appAxios.get("/users/customers").then((res) => {
+      const categories = res.data?.map((item) => item);
+      userList.value = categories.filter((item) => item.group == e);
+    });
+    return;
+  }
   appAxios.get("/users/customers").then((res) => {
-    const categories = res.data?.map((item) => item);
-
-    // userList.value = categories.filter((item) => item === e);
-
-    // console.log((userList.value.group = e));
-
-    // console.log(categories.filter((item) => item.group == e));
-
-    userList.value = categories.filter((item) => item.group == e);
+    userList.value = res?.data || [];
   });
 };
+
+fetchCustomer();
 </script>
 
 <template>
@@ -37,8 +38,10 @@ const groupFilter = (e) => {
   <LeftSidebar @group-change="groupFilter" />
 
   <div class="link">
-    <CustomerAdd />
-    <CustomerCard v-for="user in userList" :key="user._id" :user="user" />
+    <CustomerAdd @customer-add="fetchCustomer" />
+    <div class="card-header">
+      <CustomerCard v-for="user in userList" :key="user._id" :user="user" class="p-grid" :fetchCustomer="fetchCustomer" />
+    </div>
   </div>
 </template>
 
@@ -46,5 +49,10 @@ const groupFilter = (e) => {
 .link {
   margin-top: $margin-top;
   margin-left: $margin-left;
+}
+
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

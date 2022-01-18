@@ -1,4 +1,4 @@
-import { defineEmits } from "vue";
+// import { defineEmits } from "vue";
 import { useToast } from "primevue/usetoast";
 import moment from "moment";
 import { reactive } from "@vue/reactivity";
@@ -9,7 +9,7 @@ export default function () {
   const displayModal = ref(false);
   const selectedCity = ref();
   const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
-  const emit = defineEmits(["customer-update"]);
+  // const emit = defineEmits(["customer-update"]);
 
   const toast = useToast();
 
@@ -37,7 +37,7 @@ export default function () {
       .patch(`/customers/${updatedata.value._id}`, payload)
       .then(() => {
         displayModal.value = false;
-        emit("customer-update");
+        // emit("customer-update");
         toast.add({ severity: "success", summary: "Confirmed", detail: "Record deleted", life: 3000 });
       })
       .catch((error) => {
@@ -58,7 +58,7 @@ export default function () {
   };
 
   return {
-    emit,
+    // emit,
     displayModal,
     selectedCity,
     cities,

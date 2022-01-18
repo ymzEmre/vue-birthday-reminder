@@ -34,8 +34,8 @@ onMounted(() => {
 <template>
   <Sidebar class=".p-sidebar-left" :visible="true" :showCloseIcon="false" :dismissable="false" :modal="false">
     <div class="sidebar-content">
-      <b>All Groups ({{ allGroup }})</b>
-      <p v-for="users in groups" :key="users.id" @click.prevent="$emit('group-change', users.name)">{{ users.name }} ({{ users.count }})</p>
+      <b @click="$emit('group-change', null)">All Groups ({{ allGroup }})</b>
+      <p v-for="users in groups" :key="users.id" @click="$emit('group-change', users.name)">{{ users.name }} ({{ users.count }})</p>
     </div>
   </Sidebar>
 </template>

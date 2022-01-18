@@ -28,10 +28,17 @@ const confirm2 = (event, id) => {
   });
 };
 
-defineProps({ user: Array });
+defineProps({
+  user: {
+    type: Object,
+    default: () => {},
+  },
+});
 </script>
 
 <template>
-  <Button @click="confirm2($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined p-ml-2"></Button>
-  <ConfirmPopup></ConfirmPopup>
+  <div>
+    <Button @click="confirm2($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined p-ml-2"></Button>
+    <ConfirmPopup></ConfirmPopup>
+  </div>
 </template>
