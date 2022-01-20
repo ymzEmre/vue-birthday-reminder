@@ -48,5 +48,6 @@ onMounted(() => {
 
 .sidebar-content {
   margin-top: 80px;
+  display: flex;
 }
 </style>
