@@ -11,7 +11,6 @@ const allGroup = ref();
 onMounted(() => {
   appAxios.get("/users/customers").then((res) => {
     const categories = res.data?.map((item) => item.group);
-    allGroup.value = categories.length;
     const groupCount = categories.reduce((acc, cur) => {
       if (acc[cur]) {
         acc[cur] += 1;
@@ -22,6 +21,7 @@ onMounted(() => {
       return acc;
     }, {});
 
+    allGroup.value = Object.values(groupCount).length;
     groups.value = Object.keys(groupCount).map((key) => ({
       id: new Date().getTime(),
       name: key,

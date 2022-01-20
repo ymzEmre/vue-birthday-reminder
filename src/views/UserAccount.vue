@@ -9,9 +9,42 @@ const cities = ref([
 ]);
 
 const value4 = ref(5);
+
+const items = ref([
+  {
+    label: "Home",
+    icon: "pi pi-fw pi-home",
+    to: "/",
+  },
+  {
+    label: "Calendar",
+    icon: "pi pi-fw pi-calendar",
+    to: "/calendar",
+  },
+  {
+    label: "Edit",
+    icon: "pi pi-fw pi-pencil",
+    to: "/edit",
+  },
+  {
+    label: "Documentation",
+    icon: "pi pi-fw pi-file",
+    to: "/documentation",
+  },
+  {
+    label: "Settings",
+    icon: "pi pi-fw pi-cog",
+    to: "/settings",
+  },
+]);
 </script>
 
 <template>
+  <div class="card">
+    <h5>Default</h5>
+    <TabMenu :model="items" />
+    <router-view />
+  </div>
   <h3>account</h3>
   <div class="p-field p-col-12 p-md-4 wrapper">
     <div class="p-inputgroup">
