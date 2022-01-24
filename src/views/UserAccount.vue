@@ -1,17 +1,26 @@
 <script setup>
 import { reactive, ref } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
+import { inject, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
 const store = useStore();
 
 const appAxios = inject("appAxios");
 
 const selectedCity = ref();
-const cities = ref([
+const cities = reactive([
   { name: "Hour", code: "Hour" },
   { name: "Day", code: "Day" },
   { name: "Month", code: "Month" },
 ]);
+
+onMounted(() => {
+  selectedCity.value = store.getters._getCurrentUser.reminder_type;
+});
+
+const reminderSettings = reactive({
+  reminderType: null,
+  reminderValue: store.getters._getCurrentUser.reminder_day,
+});
 
 const listboxChange = () => {
   if (selectedCity.value == "Hour") return (max.value = "24");
@@ -19,8 +28,7 @@ const listboxChange = () => {
   if (selectedCity.value == "Month") return (max.value = "12");
 };
 
-const value4 = ref(0);
-const max = ref(0);
+const max = ref();
 
 const updateUserState = reactive({
   name: store.getters._getCurrentUser.name,
@@ -28,20 +36,28 @@ const updateUserState = reactive({
   password: null,
 });
 
-// watch(
-//   () => JSON.parse(JSON.stringify(updateUserState)),
-//   (newPersonal, oldPersonal) => {
-//     console.log("newPersonal", newPersonal);
-//     console.log("oldPersonal", oldPersonal);
-//   }
-// );
+const reminderSave = () => {
+  appAxios
+    .patch("/users/reminder-settings", {
+      reminder_type: selectedCity.value,
+      reminder_day: reminderSettings.reminderValue,
+    })
+    .then(() => {
+      store.commit("setUser", {
+        ...store.getters._getCurrentUser,
+        reminder_type: selectedCity.value,
+        reminder_day: reminderSettings.reminderValue,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 const updateUser = async () => {
   const { name, email } = updateUserState;
   await appAxios
     .patch("/users", { name, email })
-    .then(() => {
-      store.commit("setUser", { name, email });
-    })
+    .then(() => {})
     .catch(() => {});
 
   if (updateUserState.password) {
@@ -87,9 +103,19 @@ const updateUser = async () => {
     <Button label="Save" icon="pi pi-check" autofocus @click="updateUser" />
     <div class="field col-12 md:col-3">
       <label for="minmax-buttons">Min-Max Boundaries</label>
-      <InputNumber id="minmax-buttons" v-model="value4" mode="decimal" showButtons min="0" :max="max" />
+      <InputNumber id="minmax-buttons" v-model="reminderSettings.reminderValue" mode="decimal" showButtons min="0" :max="max" />
     </div>
-    <Dropdown v-model="selectedCity" :options="cities" optionLabel="name" optionValue="code" placeholder="Select a City" @change="listboxChange" />
+    <Dropdown
+      v-model="selectedCity"
+      @input="reminderSettings.reminderType"
+      :options="cities"
+      optionLabel="name"
+      optionValue="code"
+      placeholder="Select a City"
+      @change="listboxChange"
+    />
+
+    <Button label="Save" icon="pi pi-check" autofocus @click="reminderSave" />
   </div>
 </template>
 
