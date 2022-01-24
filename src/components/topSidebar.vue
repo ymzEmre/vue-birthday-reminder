@@ -10,7 +10,7 @@ const logOut = () => {
   localStorage.removeItem("access_token");
 };
 
-const currentUser = store.getters._getCurrentUser;
+const currentUser = store.getters._getCurrentUser.name;
 
 const accountRoute = () => {
   router.push({ name: "Account" });
