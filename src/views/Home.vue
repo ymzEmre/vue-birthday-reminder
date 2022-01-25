@@ -1,11 +1,10 @@
 <script setup>
+import { inject, onMounted } from "@vue/runtime-core";
+import { ref } from "@vue/reactivity";
 import LeftSidebar from "@/components/LeftSidebar";
 import TopSidebar from "@/components/TopSidebar";
 import CustomerCard from "@/components/CustomerCard";
 import CustomerAdd from "@/components/CustomerAdd";
-import { inject } from "@vue/runtime-core";
-import { ref } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
 
 const appAxios = inject("appAxios");
 
@@ -17,11 +16,11 @@ const fetchCustomer = onMounted(() => {
   });
 });
 
-const groupFilter = (e) => {
-  if (e != null) {
+const groupFilter = (customerGroupName) => {
+  if (customerGroupName != null) {
     appAxios.get("/users/customers").then((res) => {
       const categories = res.data?.map((item) => item);
-      userList.value = categories.filter((item) => item.group == e);
+      userList.value = categories.filter((item) => item.group == customerGroupName);
     });
     return;
   }

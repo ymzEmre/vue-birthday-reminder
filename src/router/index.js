@@ -5,7 +5,7 @@ const routes = [
   {
     path: "/",
     name: "Login",
-    component: () => import("../views/Login.vue"),
+    component: () => import("../views/UserLogin.vue"),
   },
   {
     path: "/home",
@@ -25,7 +25,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _, next) => {
-  const authRequiredRoutes = ["Home"];
+  const authRequiredRoutes = ["Home", "Account"];
   const authNotRequiredRoutes = ["Login"];
   const _isAuthenticated = store.getters._isAuthenticated;
 

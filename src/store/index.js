@@ -9,7 +9,7 @@ export default createStore({
     setUser(state, user) {
       state.user = user;
     },
-    logoutUser(state) {
+    logOut(state) {
       state.user = null;
     },
   },
