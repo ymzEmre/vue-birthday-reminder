@@ -29,11 +29,14 @@ import AccordionTab from "primevue/accordiontab";
 import Dropdown from "primevue/dropdown";
 import InputNumber from "primevue/inputnumber";
 import TabMenu from "primevue/tabmenu";
+import { useToast } from "primevue/usetoast";
+
 const app = createApp(App);
 app.use(store);
 app.use(router);
 
 app.provide("appAxios", appAxios);
+app.provide("useToast", useToast);
 
 app.use(PrimeVue);
 app.use(ConfirmationService);
