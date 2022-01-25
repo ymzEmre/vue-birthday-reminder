@@ -1,16 +1,15 @@
 <script setup>
-import { ref } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
-import { useToast } from "primevue/usetoast";
 import { defineEmits } from "vue";
-
-const toast = useToast();
-const appAxios = inject("appAxios");
+import { inject } from "@vue/runtime-core";
+import { ref, reactive } from "@vue/reactivity";
 
 defineEmits(["user-email"]);
 
-const registerUserState = ref({
-  name: null,
+const appAxios = inject("appAxios");
+const useToast = inject("useToast");
+const toast = useToast();
+
+const user = reactive({
   email: null,
   password: null,
 });
@@ -26,7 +25,7 @@ const closeModal = () => {
 
 const registerUser = async () => {
   await appAxios
-    .post("users", registerUserState.value)
+    .post("users", user)
     .then(() => {
       toast.add({ severity: "success", summary: "Register Success", detail: "Registered", life: 3000 });
       displayModal.value = false;
@@ -47,7 +46,7 @@ const registerUser = async () => {
           <i class="pi pi-user"></i>
         </span>
         <span class="p-float-label">
-          <InputText id="inputgroup" type="text" v-model="registerUserState.name" />
+          <InputText id="inputgroup" type="text" v-model="user.name" />
           <label for="inputgroup">name</label>
         </span>
       </div>
@@ -56,7 +55,7 @@ const registerUser = async () => {
           <i class="pi pi-user"></i>
         </span>
         <span class="p-float-label">
-          <InputText id="inputgroup" type="text" v-model="registerUserState.email" />
+          <InputText id="inputgroup2" type="text" v-model="user.email" />
           <label for="inputgroup">E-Mail</label>
         </span>
       </div>
@@ -65,7 +64,7 @@ const registerUser = async () => {
           <i class="pi pi-lock"></i>
         </span>
         <span class="p-float-label">
-          <Password v-model="registerUserState.password" toggleMask :feedback="false"></Password>
+          <Password v-model="user.password" toggleMask :feedback="false"></Password>
           <label for="inputgroup">Password</label>
         </span>
       </div>
@@ -77,7 +76,7 @@ const registerUser = async () => {
         icon="pi pi-check"
         @click="
           registerUser();
-          $emit('user-email', registerUserState.email);
+          $emit('user-email', user.email);
         "
         autofocus
       />

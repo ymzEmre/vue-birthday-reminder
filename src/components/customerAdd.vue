@@ -27,7 +27,7 @@ const onSave = () => {
     .post("/customers", { ...state.customer, group: selectedGroup.value.name })
     .then(() => {
       emit("customer-add");
-      toast.add({ severity: "success", summary: "Save successful", detail: "Logined", life: 3000 });
+      toast.add({ severity: "success", summary: "Save success", detail: "Logined", life: 3000 });
     })
     .catch(() => {
       toast.add({ severity: "error", summary: "Save failed", detail: "Logined", life: 3000 });

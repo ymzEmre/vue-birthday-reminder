@@ -1,9 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
 import customerUpdate from "@/composables/customerUpdate";
-/* eslint-disable no-unused-vars */
-
-const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, updateUser } = customerUpdate();
 
 defineProps({
   user: {
@@ -11,11 +8,12 @@ defineProps({
     default: () => {},
   },
 });
+
+const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, updateUser } = customerUpdate();
 </script>
 
 <template>
   <div>
-    <Toast />
     <Button icon="pi pi-user-edit" class="p-button-info p-button-outlined" @click="openModal(user._id, user.name, user.birthday, user.group)"></Button>
 
     <Dialog header="Header" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
@@ -26,7 +24,6 @@ defineProps({
 
       <div class="p-field p-col-12 p-md-4">
         <InputMask mask="9999/99/99" v-model="updatedata.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
-
         <label for="date">Date</label>
       </div>
 

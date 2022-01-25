@@ -1,12 +1,13 @@
 <script setup>
-import { ref } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
-import { inject } from "@vue/runtime-core";
+import { reactive, ref } from "@vue/reactivity";
+import { inject, onMounted } from "@vue/runtime-core";
 
 const appAxios = inject("appAxios");
 
-const groups = ref({});
-const allGroup = ref();
+let state = reactive({
+  groups: {},
+});
+const groupsCount = ref();
 
 onMounted(() => {
   appAxios.get("/users/customers").then((res) => {
@@ -17,12 +18,12 @@ onMounted(() => {
       } else {
         acc[cur] = 1;
       }
-
       return acc;
     }, {});
 
-    allGroup.value = Object.values(groupCount).length;
-    groups.value = Object.keys(groupCount).map((key) => ({
+    groupsCount.value = Object.values(groupCount).length;
+
+    state.groups = Object.keys(groupCount).map((key) => ({
       id: new Date().getTime(),
       name: key,
       count: groupCount[key],
@@ -34,8 +35,10 @@ onMounted(() => {
 <template>
   <Sidebar class=".p-sidebar-left" :visible="true" :showCloseIcon="false" :dismissable="false" :modal="false">
     <div class="sidebar-content">
-      <b @click="$emit('group-change', null)">All Groups ({{ allGroup }})</b>
-      <p v-for="users in groups" :key="users.id" @click="$emit('group-change', users.name)">{{ users.name }} ({{ users.count }})</p>
+      <b @click="$emit('group-change', null)">All Groups ({{ groupsCount }})</b>
+      <p v-for="customerGroups in state.groups" :key="customerGroups.id" @click="$emit('group-change', customerGroups.name)">
+        {{ customerGroups.name }} ({{ customerGroups.count }})
+      </p>
     </div>
   </Sidebar>
 </template>
@@ -48,6 +51,5 @@ onMounted(() => {
 
 .sidebar-content {
   margin-top: 80px;
-  display: flex;
 }
 </style>

@@ -1,24 +1,25 @@
 <script setup>
-import { ref } from "@vue/reactivity";
+import { reactive, ref } from "@vue/reactivity";
 import { inject } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { useToast } from "primevue/usetoast";
 import UserRegister from "@/components/UserRegister";
 
-const appAxios = inject("appAxios");
 const store = useStore();
 const router = useRouter();
+
+const appAxios = inject("appAxios");
+const useToast = inject("useToast");
 const toast = useToast();
 
-const user = ref({
+const user = reactive({
   email: null,
   password: null,
 });
 
 const login = async () => {
   await appAxios
-    .post("/users/login", user.value)
+    .post("/users/login", user)
     .then((res) => {
       store.commit("setUser", res.data);
       toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Logined", life: 3000 });
@@ -32,17 +33,14 @@ const login = async () => {
 };
 
 const registeredUserEmail = (val) => {
-  user.value.email = val;
+  user.email = val;
 };
 
 const displayModal = ref(false);
 
-const openModal = () => {
-  displayModal.value = true;
-};
-const closeModal = () => {
-  displayModal.value = false;
-};
+const openModal = () => () => (displayModal.value = true);
+
+const closeModal = () => () => (displayModal.value = false);
 
 const userEmail = ref({
   email: null,

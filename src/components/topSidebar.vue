@@ -1,16 +1,17 @@
 <script setup>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+
 const store = useStore();
 const router = useRouter();
 
 const logOut = () => {
-  store.commit("logoutUser");
   router.push({ name: "Login" });
   localStorage.removeItem("access_token");
+  store.commit("logOut");
 };
 
-const currentUser = store.getters._getCurrentUser.name;
+const currentUserName = store.getters._getCurrentUser.name;
 
 const accountRoute = () => {
   router.push({ name: "Account" });
@@ -22,7 +23,7 @@ const accountRoute = () => {
     <div class="sidebar-top-header">
       <div>LOGO</div>
       <div>
-        <h3>{{ currentUser }}</h3>
+        <h3>{{ currentUserName }}</h3>
         <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
         <p @click="accountRoute">Account</p>
       </div>

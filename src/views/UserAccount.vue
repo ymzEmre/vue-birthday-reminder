@@ -2,8 +2,8 @@
 import { reactive, ref } from "@vue/reactivity";
 import { inject, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
-const store = useStore();
 
+const store = useStore();
 const appAxios = inject("appAxios");
 
 const selectedCity = ref();

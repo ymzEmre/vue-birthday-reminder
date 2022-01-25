@@ -1,12 +1,20 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
-
-import { useConfirm } from "primevue/useconfirm";
-import { useToast } from "primevue/usetoast";
 import { inject } from "@vue/runtime-core";
+import { useConfirm } from "primevue/useconfirm";
+
+defineProps({
+  user: {
+    type: Object,
+    default: () => {},
+  },
+});
+
 const appAxios = inject("appAxios");
-const confirm = useConfirm();
+const useToast = inject("useToast");
 const toast = useToast();
+const confirm = useConfirm();
+
 const emit = defineEmits(["customer-delete"]);
 
 const deleteUser = (id) => {
@@ -15,7 +23,7 @@ const deleteUser = (id) => {
   });
 };
 
-const confirm2 = (event, id) => {
+const deleteUserPopup = (event, id) => {
   confirm.require({
     target: event.currentTarget,
     message: "Do you want to delete this record?",
@@ -23,22 +31,15 @@ const confirm2 = (event, id) => {
     acceptClass: "p-button-danger",
     accept: () => {
       deleteUser(id);
-      toast.add({ severity: "success", summary: "Confirmed", detail: "Logout", life: 3000 });
+      toast.add({ severity: "success", summary: "Delete succesfull", detail: "Logout", life: 3000 });
     },
   });
 };
-
-defineProps({
-  user: {
-    type: Object,
-    default: () => {},
-  },
-});
 </script>
 
 <template>
   <div>
-    <Button @click="confirm2($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined p-ml-2"></Button>
+    <Button @click="deleteUserPopup($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined p-ml-2"></Button>
     <ConfirmPopup></ConfirmPopup>
   </div>
 </template>

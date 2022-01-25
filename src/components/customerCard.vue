@@ -1,9 +1,9 @@
 <script setup>
+import { defineProps } from "vue";
 import CustomerUpdate from "@/components/CustomerUpdate";
 import CustomerDelete from "@/components/CustomerDelete";
 import moment from "moment";
 
-import { defineProps } from "vue";
 defineProps({
   user: {
     type: Object,
@@ -18,13 +18,12 @@ defineProps({
   fetchCustomer: Function,
 });
 
-const remaingDayCalc = (birth) => {
+const remainingDay = (birth) => {
   const today = moment();
   const birtday = moment(birth);
   const age = today.diff(birtday, "years");
-  const remaingDays = birtday.add(age + 1, "years").diff(today, "days");
-
-  return `Remaining Days: ${remaingDays}`;
+  const remainingDays = birtday.add(age + 1, "years").diff(today, "days");
+  return remainingDays;
 };
 </script>
 
@@ -46,7 +45,7 @@ const remaingDayCalc = (birth) => {
     <template #content>
       <p>Birthday: {{ moment(user.birthday).format("YYYY-MM-DD") }}</p>
       <p>Age: {{ moment().diff(user.birthday, "years") }}</p>
-      <p v-text="remaingDayCalc(user.birthday)"></p>
+      <p v-text="'Remaining day ' + remainingDay(user.birthday)"></p>
     </template>
   </Card>
 </template>
