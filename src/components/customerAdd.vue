@@ -2,55 +2,54 @@
 import { reactive } from "@vue/reactivity";
 import { ref } from "@vue/reactivity";
 import { inject } from "@vue/runtime-core";
-import { useToast } from "primevue/usetoast";
 import { defineEmits } from "vue";
+
+const appAxios = inject("appAxios");
+const useToast = inject("useToast");
+const toast = useToast();
 
 const emit = defineEmits(["customer-add"]);
 
-const toast = useToast();
+const selectedGroup = ref();
 
-const appAxios = inject("appAxios");
+const state = reactive({
+  customer: {
+    name: null,
+    group: null,
+    birthday: null,
+  },
 
-const data = ref({
-  name: null,
-  group: null,
-  birthday: null,
+  groups: [{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }],
 });
 
-const selectedCity = ref();
-const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
-
 const onSave = () => {
-  const selectedGroup = selectedCity.value.name;
   appAxios
-    .post("/customers", { ...data.value, group: selectedGroup })
+    .post("/customers", { ...state.customer, group: selectedGroup.value.name })
     .then(() => {
       emit("customer-add");
-      toast.add({ severity: "success", summary: "save added", detail: "Logined", life: 3000 });
+      toast.add({ severity: "success", summary: "Save successful", detail: "Logined", life: 3000 });
     })
-    .catch((error) => {
+    .catch(() => {
       toast.add({ severity: "error", summary: "Save failed", detail: "Logined", life: 3000 });
-      console.log(error);
     });
 };
 </script>
 
 <template>
   <Toast />
-
-  <div class="p-grid add-new">
-    <Accordion class="p-shadow-4 content">
+  <div class="p-grid add-new-section">
+    <Accordion class="p-shadow-4 add-new-accordion">
       <AccordionTab header="Add New">
         <span class="p-float-label p-mt-2">
-          <InputText id="username" class="form-customer-username" type="text" v-model="data.name" />
+          <InputText id="username" class="customer-name" type="text" v-model="state.customer.name" />
           <label for="username">Username</label>
         </span>
-        <div class="p-field p-col-12 form-customer-birthday">
+        <div class="p-field p-col-12 customer-birthday">
           <label for="date">Date</label>
-          <InputMask mask="9999/99/99" v-model="data.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
+          <InputMask mask="9999/99/99" v-model="state.customer.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
         </div>
         <label for="date">Group</label>
-        <Listbox class="p-mt-2" v-model="selectedCity" @input="data.group" :options="cities" optionLabel="name" />
+        <Listbox class="p-mt-2" v-model="selectedGroup" @input="state.customer.group" :options="state.groups" optionLabel="name" />
         <Button class="p-button-success form-button-save" icon="pi pi-check" label="Save" @click="onSave"></Button>
       </AccordionTab>
     </Accordion>
@@ -58,30 +57,30 @@ const onSave = () => {
 </template>
 
 <style lang="scss">
-.add-new {
+.add-new-section {
   margin-left: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.content {
+.add-new-accordion {
   width: 23rem;
 }
 
-.form-customer-username {
+.customer-name {
   width: 100%;
 }
 
-.form-customer-birthday {
+.customer-birthday {
   padding: 0;
+  margin-top: 1rem;
+}
+
+.p-button-success {
   margin-top: 1rem;
 }
 
 .p-inputmask {
   width: 100%;
-}
-
-.form-button-save {
-  margin-top: 1rem;
 }
 
 .p-accordion-header-link {
