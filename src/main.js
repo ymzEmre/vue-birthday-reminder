@@ -30,6 +30,7 @@ import Dropdown from "primevue/dropdown";
 import InputNumber from "primevue/inputnumber";
 import TabMenu from "primevue/tabmenu";
 import { useToast } from "primevue/usetoast";
+import InputSwitch from "primevue/inputswitch";
 
 const app = createApp(App);
 app.use(store);
@@ -57,5 +58,6 @@ app.component("AccordionTab", AccordionTab);
 app.component("Dropdown", Dropdown);
 app.component("InputNumber", InputNumber);
 app.component("TabMenu", TabMenu);
+app.component("InputSwitch", InputSwitch);
 
 app.mount("#app");

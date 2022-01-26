@@ -1,9 +1,11 @@
 <script setup>
-import { defineEmits } from "vue";
 import { inject } from "@vue/runtime-core";
 import { ref, reactive } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
-defineEmits(["user-email"]);
+const store = useStore();
+const router = useRouter();
 
 const appAxios = inject("appAxios");
 const useToast = inject("useToast");
@@ -27,11 +29,30 @@ const registerUser = async () => {
   await appAxios
     .post("users", user)
     .then(() => {
-      toast.add({ severity: "success", summary: "Register Success", detail: "Registered", life: 3000 });
-      displayModal.value = false;
+      login();
     })
     .catch(() => {
       toast.add({ severity: "error", summary: "Register Failed", detail: "Registered", life: 3000 });
+    });
+};
+
+const login = async () => {
+  const payload = {
+    email: user.email,
+    password: user.password,
+  };
+  await appAxios
+    .post("/users/login", payload)
+    .then((res) => {
+      store.commit("setUser", res.data);
+      toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Logined", life: 3000 });
+      localStorage.setItem("access_token", res.data.tokens.access_token);
+      setTimeout(() => {
+        router.push({ name: "Home" });
+      }, 1000);
+    })
+    .catch(() => {
+      toast.add({ severity: "error", summary: "Login Failed", detail: "Record deleted", life: 3000 });
     });
 };
 </script>
@@ -71,15 +92,7 @@ const registerUser = async () => {
     </div>
     <template #footer>
       <Button label="No" icon="pi pi-times" @click="closeModal" class="p-button-text" />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        @click="
-          registerUser();
-          $emit('user-email', user.email);
-        "
-        autofocus
-      />
+      <Button label="Yes" icon="pi pi-check" @click="registerUser" autofocus />
     </template>
   </Dialog>
 </template>

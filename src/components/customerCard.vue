@@ -30,10 +30,8 @@ const remainingDay = (birth) => {
 <template>
   <Card class="p-card p-shadow-4">
     <template #title>
-      <div>
+      <div class="customer-header">
         <p class="p-m-0">{{ user.name }}</p>
-      </div>
-      <div>
         <CustomerUpdate :userList="userList" :user="user" @customer-update="fetchCustomer" />
         <CustomerDelete :userList="userList" :user="user" @customer-delete="fetchCustomer" />
       </div>
@@ -45,7 +43,7 @@ const remainingDay = (birth) => {
     <template #content>
       <p>Birthday: {{ moment(user.birthday).format("YYYY-MM-DD") }}</p>
       <p>Age: {{ moment().diff(user.birthday, "years") }}</p>
-      <p v-text="'Remaining day ' + remainingDay(user.birthday)"></p>
+      <p v-text="'Remaining day: ' + remainingDay(user.birthday)"></p>
     </template>
   </Card>
 </template>
@@ -53,7 +51,14 @@ const remainingDay = (birth) => {
 <style lang="scss">
 .p-card {
   background-color: #ebebeb;
-  width: 23rem;
-  margin: 0rem 0rem 2rem 2rem;
+  width: 18rem;
+  margin: 0rem 0rem 2rem 1.5rem;
+  height: 15rem;
+}
+
+.customer-header {
+  display: grid;
+  grid-template-columns: 6fr 0fr 0fr;
+  margin-bottom: -10px;
 }
 </style>

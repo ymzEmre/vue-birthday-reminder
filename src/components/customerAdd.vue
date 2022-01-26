@@ -27,10 +27,10 @@ const onSave = () => {
     .post("/customers", { ...state.customer, group: selectedGroup.value.name })
     .then(() => {
       emit("customer-add");
-      toast.add({ severity: "success", summary: "Save success", detail: "Logined", life: 3000 });
+      toast.add({ severity: "success", summary: "Save success", life: 3000 });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Save failed", detail: "Logined", life: 3000 });
+      toast.add({ severity: "error", summary: "Save failed", life: 3000 });
     });
 };
 </script>
@@ -44,10 +44,12 @@ const onSave = () => {
           <InputText id="username" class="customer-name" type="text" v-model="state.customer.name" />
           <label for="username">Username</label>
         </span>
+
         <div class="p-field p-col-12 customer-birthday">
           <label for="date">Date</label>
           <InputMask mask="9999/99/99" v-model="state.customer.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
         </div>
+
         <label for="date">Group</label>
         <Listbox class="p-mt-2" v-model="selectedGroup" @input="state.customer.group" :options="state.groups" optionLabel="name" />
         <Button class="p-button-success form-button-save" icon="pi pi-check" label="Save" @click="onSave"></Button>
@@ -63,7 +65,7 @@ const onSave = () => {
 }
 
 .add-new-accordion {
-  width: 23rem;
+  width: 18rem;
 }
 
 .customer-name {

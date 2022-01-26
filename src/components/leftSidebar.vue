@@ -37,7 +37,7 @@ onMounted(() => {
     <div class="sidebar-content">
       <b @click="$emit('group-change', null)">All Groups ({{ groupsCount }})</b>
       <p v-for="customerGroups in state.groups" :key="customerGroups.id" @click="$emit('group-change', customerGroups.name)">
-        {{ customerGroups.name }} ({{ customerGroups.count }})
+        <Tag class="p-mr-2" severity="warning">{{ customerGroups.name }}</Tag> ({{ customerGroups.count }})
       </p>
     </div>
   </Sidebar>

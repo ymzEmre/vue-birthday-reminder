@@ -2,9 +2,12 @@
 import { reactive, ref } from "@vue/reactivity";
 import { inject, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import TopSidebar from "@/components/TopSidebar";
 
 const store = useStore();
 const appAxios = inject("appAxios");
+
+const checked = ref();
 
 const selectedCity = ref();
 const cities = reactive([
@@ -15,6 +18,7 @@ const cities = reactive([
 
 onMounted(() => {
   selectedCity.value = store.getters._getCurrentUser.reminder_type;
+  checked.value = store.getters._getCurrentUser.reminder_status;
 });
 
 const reminderSettings = reactive({
@@ -68,58 +72,81 @@ const updateUser = async () => {
       .catch(() => {});
   }
 };
+
+const reminderStatus = async () => {
+  await appAxios
+    .patch("/users/reminder-settings", { reminder_status: checked.value })
+    .then(() => {
+      store.commit("setUser", {
+        ...store.getters._getCurrentUser,
+        reminder_status: checked.value,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 </script>
 
 <template>
-  <h3>account</h3>
-  <div class="p-field p-col-12 p-md-4 wrapper">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-user"></i>
-      </span>
-      <span class="p-float-label">
-        <InputText id="inputgroup" type="text" v-model="updateUserState.name" />
-        <label for="inputgroup">name</label>
-      </span>
-    </div>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-user"></i>
-      </span>
-      <span class="p-float-label">
-        <InputText id="inputgroup2" type="text" v-model="updateUserState.email" />
-        <label for="inputgroup">E-Mail</label>
-      </span>
-    </div>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-lock"></i>
-      </span>
-      <span class="p-float-label">
-        <Password toggleMask v-model="updateUserState.password"></Password>
-        <label for="inputgroup">New password</label>
-      </span>
-    </div>
-    <Button label="Save" icon="pi pi-check" autofocus @click="updateUser" />
-    <div class="field col-12 md:col-3">
-      <label for="minmax-buttons">Min-Max Boundaries</label>
-      <InputNumber id="minmax-buttons" v-model="reminderSettings.reminderValue" mode="decimal" showButtons min="0" :max="max" />
-    </div>
-    <Dropdown
-      v-model="selectedCity"
-      @input="reminderSettings.reminderType"
-      :options="cities"
-      optionLabel="name"
-      optionValue="code"
-      placeholder="Select a City"
-      @change="listboxChange"
-    />
+  <TopSidebar />
 
-    <Button label="Save" icon="pi pi-check" autofocus @click="reminderSave" />
+  <div class="link">
+    <div class="p-field p-col-12 p-md-4 wrapper">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
+        <span class="p-float-label">
+          <InputText id="inputgroup" type="text" v-model="updateUserState.name" />
+          <label for="inputgroup">name</label>
+        </span>
+      </div>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
+        <span class="p-float-label">
+          <InputText id="inputgroup2" type="text" v-model="updateUserState.email" />
+          <label for="inputgroup">E-Mail</label>
+        </span>
+      </div>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-lock"></i>
+        </span>
+        <span class="p-float-label">
+          <Password toggleMask v-model="updateUserState.password"></Password>
+          <label for="inputgroup">New password</label>
+        </span>
+      </div>
+      <Button label="Save" icon="pi pi-check" autofocus @click="updateUser" />
+      <InputSwitch v-model="checked" @change="reminderStatus" />
+      <div class="field col-12 md:col-3">
+        <label for="minmax-buttons">Min-Max Boundaries</label>
+        <InputNumber id="minmax-buttons" v-model="reminderSettings.reminderValue" mode="decimal" showButtons min="0" :max="max" :disabled="!checked" />
+      </div>
+      <Dropdown
+        v-model="selectedCity"
+        @input="reminderSettings.reminderType"
+        :options="cities"
+        optionLabel="name"
+        dataKey="code"
+        optionValue="code"
+        placeholder="Select a City"
+        @change="listboxChange"
+        :disabled="!checked"
+      />
+
+      <Button label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!checked" />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.link {
+  margin-top: $margin-top;
+}
 .p-dropdown {
   width: 14rem;
 }

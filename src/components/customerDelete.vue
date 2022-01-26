@@ -31,7 +31,7 @@ const deleteUserPopup = (event, id) => {
     acceptClass: "p-button-danger",
     accept: () => {
       deleteUser(id);
-      toast.add({ severity: "success", summary: "Delete succesfull", detail: "Logout", life: 3000 });
+      toast.add({ severity: "success", summary: "Delete succesfull", life: 3000 });
     },
   });
 };

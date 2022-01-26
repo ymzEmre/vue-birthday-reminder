@@ -25,15 +25,13 @@ const login = async () => {
       toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Logined", life: 3000 });
 
       localStorage.setItem("access_token", res.data.tokens.access_token);
-      router.push({ name: "Home" });
+      setTimeout(() => {
+        router.push({ name: "Home" });
+      }, 1000);
     })
     .catch(() => {
       toast.add({ severity: "error", summary: "Login Failed", detail: "Record deleted", life: 3000 });
     });
-};
-
-const registeredUserEmail = (val) => {
-  user.email = val;
 };
 
 const displayModal = ref(false);
@@ -84,7 +82,7 @@ const forgettenPassword = async () => {
           </span>
         </div>
         <Button label="Login" icon="pi pi-sign-in" @click="login" />
-        <UserRegister @user-email="registeredUserEmail" />
+        <UserRegister />
         <p @click="openModal">Forgetten Password</p>
       </div>
     </div>
