@@ -27,10 +27,10 @@ const onSave = () => {
     .post("/customers", { ...state.customer, group: selectedGroup.value.name })
     .then(() => {
       emit("customer-add");
-      toast.add({ severity: "success", summary: "Save success", life: 3000 });
+      toast.add({ severity: "success", summary: "Add successful", life: 3000 });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Save failed", life: 3000 });
+      toast.add({ severity: "error", summary: "Add failed", life: 3000 });
     });
 };
 </script>

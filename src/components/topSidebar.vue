@@ -20,13 +20,10 @@ const accountRoute = () => {
 
 <template>
   <Sidebar visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <div class="sidebar-top-header">
-      <div>LOGO</div>
-      <div>
-        <h3>{{ currentUserName }}</h3>
-        <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
-        <p @click="accountRoute">Account</p>
-      </div>
+    <div class="p-sidebar-top-content">
+      <h3>{{ currentUserName }}</h3>
+      <p @click="accountRoute">Account</p>
+      <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
     </div>
   </Sidebar>
 </template>
@@ -36,8 +33,21 @@ const accountRoute = () => {
   height: 5rem !important;
 }
 
+.p-sidebar-top-content {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: -21px;
+}
+
 .sidebar-top-header {
-  display: grid !important;
-  grid-template-columns: 1fr 0fr !important;
+  // display: grid;
+  // grid-template-columns: 1fr 0fr;
+}
+
+.sidebar-top-header-right {
+  // display: flex;
+  // align-items: center;
+  // justify-content: end;
 }
 </style>
