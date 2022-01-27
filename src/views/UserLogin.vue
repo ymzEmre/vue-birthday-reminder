@@ -48,7 +48,7 @@ const userEmail = ref({
   email: null,
 });
 
-const forgettenPassword = async () => {
+const forgottenPassword = async () => {
   await appAxios
     .post("users/reset-password", userEmail.value)
     .then(() => {
@@ -64,8 +64,8 @@ const forgettenPassword = async () => {
   <Toast />
 
   <div class="p-d-flex wrapper">
-    <div class="p-mr-2 p-as-center emre">
-      <div class="p-grid">
+    <div class="p-mr-2 p-as-center">
+      <div class="p-grid form-section">
         <div class="p-inputgroup p-mt-3">
           <span class="p-inputgroup-addon">
             <i class="pi pi-user"></i>
@@ -76,7 +76,7 @@ const forgettenPassword = async () => {
           </span>
         </div>
 
-        <div class="p-inputgroup p-mt-3">
+        <div class="p-inputgroup p-mt-5">
           <span class="p-inputgroup-addon">
             <i class="pi pi-lock"></i>
           </span>
@@ -85,10 +85,12 @@ const forgettenPassword = async () => {
             <label for="inputgroup">Password</label>
           </span>
         </div>
-        <div class="p-mt-3">
-          <Button class="p-mr-3" label="Sign In" icon="pi pi-sign-in" @click="login" />
-          <UserRegister />
-          <p @click="openModal">Forgot password?</p>
+        <div class="p-mt-5 form-footer">
+          <Button class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" @click="login" />
+          <div>
+            <UserRegister />
+            <p @click="openModal">Forgot password?</p>
+          </div>
         </div>
       </div>
     </div>
@@ -108,24 +110,36 @@ const forgettenPassword = async () => {
     </div>
     <template #footer>
       <Button class="p-button-text" label="Cancel" icon="pi pi-times" @click="closeModal" />
-      <Button class="p-button-success" label="Ok" icon="pi pi-check" autofocus @click="forgettenPassword" />
+      <Button class="p-button-success" label="Ok" icon="pi pi-check" autofocus @click="forgottenPassword" />
     </template>
   </Dialog>
 </template>
 
 <style lang="scss">
-body {
-  overflow: hidden;
+.form-section {
+  padding: 2em;
+  border-radius: 20px;
+  background: linear-gradient(to right, #e0e0e0, #c4c4c4);
 }
-
 .wrapper {
   height: 100vh;
 }
+
 .emre {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100vw;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sign-in {
+  max-height: 40px;
 }
 
 ::v-deep(.p-password input) {

@@ -37,7 +37,7 @@ const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, u
           icon="pi pi-check"
           @click="
             updateUser();
-            $emit('customer-update');
+            $emit('customer-update-delete');
           "
           autofocus
         />

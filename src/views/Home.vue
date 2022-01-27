@@ -1,5 +1,5 @@
 <script setup>
-import { inject, onMounted } from "@vue/runtime-core";
+import { inject } from "@vue/runtime-core";
 import { ref } from "@vue/reactivity";
 import LeftSidebar from "@/components/LeftSidebar";
 import TopSidebar from "@/components/TopSidebar";
@@ -10,11 +10,12 @@ const appAxios = inject("appAxios");
 
 const userList = ref([]);
 
-const fetchCustomer = onMounted(() => {
+const fetchCustomer = () => {
   appAxios.get("/users/customers").then((res) => {
     userList.value = res?.data || [];
   });
-});
+  console.log("first");
+};
 
 const groupFilter = (customerGroupName) => {
   if (customerGroupName != null) {
@@ -39,7 +40,7 @@ fetchCustomer();
   <div class="link">
     <CustomerAdd @customer-add="fetchCustomer" />
     <div class="card-header">
-      <CustomerCard v-for="user in userList" :key="user._id" :user="user" class="p-grid" />
+      <CustomerCard v-for="user in userList" :key="user._id" :user="user" class="p-grid" @customer-update-delete="fetchCustomer" />
     </div>
   </div>
 </template>

@@ -15,11 +15,11 @@ const useToast = inject("useToast");
 const toast = useToast();
 const confirm = useConfirm();
 
-const emit = defineEmits(["customer-delete"]);
+const emit = defineEmits(["customer-update-delete"]);
 
 const deleteUser = (id) => {
   appAxios.delete(`/customers/${id}`).then(() => {
-    emit("customer-delete");
+    emit("customer-update-delete");
   });
 };
 

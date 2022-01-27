@@ -38,8 +38,8 @@ const remainingDay = (birth) => {
     <template #title>
       <div class="customer-header">
         <p class="p-m-0">{{ user.name }}</p>
-        <CustomerUpdate :userList="userList" :user="user" @customer-update="fetchCustomer" />
-        <CustomerDelete :userList="userList" :user="user" @customer-delete="fetchCustomer" />
+        <CustomerUpdate :userList="userList" :user="user" @customer-update-delete="$emit('customer-update-delete')" />
+        <CustomerDelete :userList="userList" :user="user" @customer-update-delete="$emit('customer-update-delete')" />
       </div>
 
       <div>
