@@ -59,8 +59,8 @@ const login = async () => {
 
 <template>
   <Toast />
-  <Button label="Register" icon="pi pi-user-plus" @click="openModal" />
-  <Dialog header="Header" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
+  <Button label="Sign Up" icon="pi pi-user-plus" @click="openModal" />
+  <Dialog header="Sign Up" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
     <div class="p-field p-col-12 p-md-4 wrapper">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
@@ -71,7 +71,7 @@ const login = async () => {
           <label for="inputgroup">name</label>
         </span>
       </div>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup p-mt-4">
         <span class="p-inputgroup-addon">
           <i class="pi pi-user"></i>
         </span>
@@ -80,7 +80,7 @@ const login = async () => {
           <label for="inputgroup">E-Mail</label>
         </span>
       </div>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup p-mt-4">
         <span class="p-inputgroup-addon">
           <i class="pi pi-lock"></i>
         </span>
@@ -91,8 +91,8 @@ const login = async () => {
       </div>
     </div>
     <template #footer>
-      <Button label="No" icon="pi pi-times" @click="closeModal" class="p-button-text" />
-      <Button label="Yes" icon="pi pi-check" @click="registerUser" autofocus />
+      <Button label="Cancel" icon="pi pi-times" @click="closeModal" class="p-button-text" />
+      <Button class="p-button-success" label="Ok" icon="pi pi-check" @click="registerUser" autofocus />
     </template>
   </Dialog>
 </template>

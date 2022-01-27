@@ -3,6 +3,8 @@ import { defineProps } from "vue";
 import CustomerUpdate from "@/components/CustomerUpdate";
 import CustomerDelete from "@/components/CustomerDelete";
 import moment from "moment";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 defineProps({
   user: {
@@ -17,6 +19,10 @@ defineProps({
 
   fetchCustomer: Function,
 });
+
+const emre = () => {
+  router.push({ name: "Account" });
+};
 
 const remainingDay = (birth) => {
   const today = moment();
@@ -41,7 +47,7 @@ const remainingDay = (birth) => {
       </div>
     </template>
     <template #content>
-      <p>Birthday: {{ moment(user.birthday).format("YYYY-MM-DD") }}</p>
+      <p @click="emre">Birthday: {{ moment(user.birthday).format("YYYY-MM-DD") }}</p>
       <p>Age: {{ moment().diff(user.birthday, "years") }}</p>
       <p v-text="'Remaining day: ' + remainingDay(user.birthday)"></p>
     </template>

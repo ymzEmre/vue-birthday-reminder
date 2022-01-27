@@ -84,7 +84,7 @@ const reminderStatus = async () => {
         v-model="reminderSettings.reminderValue"
         mode="decimal"
         showButtons
-        min="0"
+        :min="0"
         :max="max"
         :disabled="!checked"
       />

@@ -36,9 +36,13 @@ const login = async () => {
 
 const displayModal = ref(false);
 
-const openModal = () => () => (displayModal.value = true);
+const openModal = () => {
+  displayModal.value = true;
+};
 
-const closeModal = () => () => (displayModal.value = false);
+const closeModal = () => {
+  displayModal.value = false;
+};
 
 const userEmail = ref({
   email: null,
@@ -59,10 +63,10 @@ const forgettenPassword = async () => {
 <template>
   <Toast />
 
-  <div class="p-d-flex wrapper" style="height: 100vh">
-    <div class="p-mr-2 p-as-center">
-      <div class="p-grid wrapper">
-        <div class="p-inputgroup">
+  <div class="p-d-flex wrapper">
+    <div class="p-mr-2 p-as-center emre">
+      <div class="p-grid">
+        <div class="p-inputgroup p-mt-3">
           <span class="p-inputgroup-addon">
             <i class="pi pi-user"></i>
           </span>
@@ -72,7 +76,7 @@ const forgettenPassword = async () => {
           </span>
         </div>
 
-        <div class="p-inputgroup">
+        <div class="p-inputgroup p-mt-3">
           <span class="p-inputgroup-addon">
             <i class="pi pi-lock"></i>
           </span>
@@ -81,14 +85,16 @@ const forgettenPassword = async () => {
             <label for="inputgroup">Password</label>
           </span>
         </div>
-        <Button label="Login" icon="pi pi-sign-in" @click="login" />
-        <UserRegister />
-        <p @click="openModal">Forgetten Password</p>
+        <div class="p-mt-3">
+          <Button class="p-mr-3" label="Sign In" icon="pi pi-sign-in" @click="login" />
+          <UserRegister />
+          <p @click="openModal">Forgot password?</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <Dialog header="Header" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
+  <Dialog header="Forgot Password?" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
     <div class="p-field p-col-12 p-md-4 wrapper">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
@@ -101,15 +107,25 @@ const forgettenPassword = async () => {
       </div>
     </div>
     <template #footer>
-      <Button label="No" icon="pi pi-times" @click="closeModal" class="p-button-text" />
-      <Button label="Yes" icon="pi pi-check" autofocus @click="forgettenPassword" />
+      <Button class="p-button-text" label="Cancel" icon="pi pi-times" @click="closeModal" />
+      <Button class="p-button-success" label="Ok" icon="pi pi-check" autofocus @click="forgettenPassword" />
     </template>
   </Dialog>
 </template>
 
 <style lang="scss">
+body {
+  overflow: hidden;
+}
+
 .wrapper {
-  margin-top: 30px;
+  height: 100vh;
+}
+.emre {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
 }
 
 ::v-deep(.p-password input) {

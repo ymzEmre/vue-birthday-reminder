@@ -16,14 +16,21 @@ const currentUserName = store.getters._getCurrentUser.name;
 const accountRoute = () => {
   router.push({ name: "Account" });
 };
+
+const goHome = () => {
+  router.push({ name: "Home" });
+};
 </script>
 
 <template>
-  <Sidebar visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <div class="p-sidebar-top-content">
-      <h3>{{ currentUserName }}</h3>
-      <p @click="accountRoute">Account</p>
-      <Button label="Logout" icon="pi pi-sign-out" @click="logOut" />
+  <Sidebar :visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
+    <div>
+      <span @click="goHome">LOGO</span>
+      <div class="p-sidebar-top-content">
+        <h3>{{ currentUserName }}</h3>
+        <p class="p-ml-4" @click="accountRoute">Account</p>
+        <Button class="p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
+      </div>
     </div>
   </Sidebar>
 </template>
@@ -40,14 +47,7 @@ const accountRoute = () => {
   margin-top: -21px;
 }
 
-.sidebar-top-header {
-  // display: grid;
-  // grid-template-columns: 1fr 0fr;
-}
-
-.sidebar-top-header-right {
-  // display: flex;
-  // align-items: center;
-  // justify-content: end;
+.p-sidebar-content {
+  overflow: hidden;
 }
 </style>
