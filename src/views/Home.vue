@@ -14,7 +14,6 @@ const fetchCustomer = () => {
   appAxios.get("/users/customers").then((res) => {
     userList.value = res?.data || [];
   });
-  console.log("first");
 };
 
 const groupFilter = (customerGroupName) => {
@@ -40,7 +39,16 @@ fetchCustomer();
   <div class="link">
     <CustomerAdd @customer-add="fetchCustomer" />
     <div class="card-header">
-      <CustomerCard v-for="user in userList" :key="user._id" :user="user" class="p-grid" @customer-update-delete="fetchCustomer" />
+      <CustomerCard
+        v-for="user in userList"
+        :key="user._id"
+        :user="user"
+        class="p-grid"
+        @customer-update-delete="
+          fetchCustomer();
+          groupFilter();
+        "
+      />
     </div>
   </div>
 </template>

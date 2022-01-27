@@ -64,7 +64,7 @@ const forgottenPassword = async () => {
   <Toast />
 
   <div class="p-d-flex wrapper">
-    <div class="p-mr-2 p-as-center">
+    <div class="p-mr-2 p-as-center form-wrapper">
       <div class="p-grid form-section">
         <div class="p-inputgroup p-mt-3">
           <span class="p-inputgroup-addon">
@@ -125,7 +125,7 @@ const forgottenPassword = async () => {
   height: 100vh;
 }
 
-.emre {
+.form-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
