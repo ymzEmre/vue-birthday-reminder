@@ -83,6 +83,9 @@ const onSave = () => {
 }
 
 .p-accordion-header-link {
-  background: #f5f5f5 !important;
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  box-shadow: 0px 0px 8px 2px #6e6e6e;
 }
 </style>

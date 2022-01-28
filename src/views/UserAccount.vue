@@ -14,13 +14,24 @@ import TopSidebar from "@/components/TopSidebar";
 </template>
 
 <style lang="scss">
+body {
+  background: url("../assets/images/login-bg.jpg") center no-repeat;
+  background-size: cover;
+}
 .link {
   margin-top: $margin-top;
+  margin-left: $margin-left;
 }
 
 .user-account {
   display: flex;
   justify-content: space-evenly;
   margin-left: unset !important;
+}
+
+.form-section {
+  padding: 2em;
+  border-radius: 20px;
+  backdrop-filter: blur(100px);
 }
 </style>

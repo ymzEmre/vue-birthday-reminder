@@ -95,3 +95,5 @@ const login = async () => {
     </template>
   </Dialog>
 </template>
+
+<style lang="scss"></style>

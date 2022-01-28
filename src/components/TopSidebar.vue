@@ -24,20 +24,23 @@ const goHome = () => {
 
 <template>
   <Sidebar :visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <div>
-      <span @click="goHome">LOGO</span>
-      <div class="p-sidebar-top-content">
-        <h3>{{ currentUserName }}</h3>
-        <p class="p-ml-4" @click="accountRoute">Account</p>
-        <Button class="p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
-      </div>
+    <!-- <div> -->
+    <span @click="goHome">LOGO</span>
+    <div class="p-sidebar-top-content">
+      <h3>{{ currentUserName }}</h3>
+      <p class="p-ml-4" @click="accountRoute">Account</p>
+      <Button class="p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
     </div>
+    <!-- </div> -->
   </Sidebar>
 </template>
 
 <style lang="scss">
 .p-sidebar-top {
   height: 5rem !important;
+  background: transparent;
+  color: #fff;
+  box-shadow: 0px 0px 6px 0px #ffffff;
 }
 
 .p-sidebar-top-content {
