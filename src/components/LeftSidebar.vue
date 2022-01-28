@@ -44,11 +44,16 @@ onMounted(() => {
 
 <style lang="scss">
 .p-sidebar-left {
+  margin-top: 5em;
   width: 15rem !important;
   z-index: 0 !important;
+  background: transparent;
+  color: #fff;
+  box-shadow: 0px 0px 6px 0px #ffffff;
+  box-shadow: 0px 3px 6px 0px #ffffff;
 }
 
 .sidebar-content {
-  margin-top: 80px;
+  // margin-top: 80px;
 }
 </style>

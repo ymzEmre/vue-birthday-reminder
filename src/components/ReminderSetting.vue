@@ -109,11 +109,6 @@ const reminderStatus = async () => {
 </template>
 
 <style lang="scss">
-.form-section {
-  padding: 2em;
-  border-radius: 20px;
-  background: linear-gradient(to right, #e0e0e0, #c4c4c4);
-}
 .button {
   display: block;
 }

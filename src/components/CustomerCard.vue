@@ -26,7 +26,7 @@ const remainingDay = (birth) => {
 </script>
 
 <template>
-  <Card class="p-card p-shadow-4">
+  <Card class="p-card">
     <template #title>
       <div class="customer-header">
         <p class="p-m-0">{{ user.name }}</p>
@@ -48,11 +48,14 @@ const remainingDay = (birth) => {
 
 <style lang="scss">
 .p-card {
-  background-color: #f5f5f5;
   width: 18rem;
   margin: 0rem 0rem 2rem 1.5rem;
   height: 15rem;
-  color: #000;
+  color: #fff;
+  backdrop-filter: blur(15px);
+  background: unset;
+  box-shadow: 0px 0px 8px 2px #6e6e6e;
+  border-radius: 8px;
 }
 
 .p-tag.p-tag-warning {
