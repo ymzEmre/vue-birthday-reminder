@@ -1,7 +1,5 @@
 <script setup>
-import { reactive } from "@vue/reactivity";
-import { ref } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
+import { inject, reactive, ref } from "@vue/runtime-core";
 import { defineEmits } from "vue";
 
 const appAxios = inject("appAxios");
@@ -18,7 +16,6 @@ const state = reactive({
     group: null,
     birthday: null,
   },
-
   groups: [{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }],
 });
 
@@ -40,7 +37,7 @@ const onSave = () => {
   <div class="p-grid add-new-section">
     <Accordion class="p-shadow-4 add-new-accordion">
       <AccordionTab header="Add New">
-        <span class="p-float-label p-mt-2">
+        <span class="p-float-label p-mt-3">
           <InputText id="username" class="customer-name" type="text" v-model="state.customer.name" />
           <label for="username">Username</label>
         </span>

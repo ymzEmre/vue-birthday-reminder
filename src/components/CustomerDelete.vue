@@ -1,7 +1,6 @@
 <script setup>
-import { defineProps } from "vue";
-import { inject } from "@vue/runtime-core";
 import { useConfirm } from "primevue/useconfirm";
+import { inject, defineProps } from "@vue/runtime-core";
 
 defineProps({
   user: {

@@ -1,6 +1,5 @@
 <script setup>
-import { reactive, ref } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
+import { inject, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import UserRegister from "@/components/UserRegister";

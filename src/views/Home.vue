@@ -1,6 +1,5 @@
 <script setup>
-import { inject, provide } from "@vue/runtime-core";
-import { ref } from "@vue/reactivity";
+import { inject, onMounted, provide, ref } from "@vue/runtime-core";
 import LeftSidebar from "@/components/LeftSidebar";
 import TopSidebar from "@/components/TopSidebar";
 import CustomerCard from "@/components/CustomerCard";
@@ -10,11 +9,15 @@ const appAxios = inject("appAxios");
 
 const userList = ref([]);
 
-const fetchCustomer = () => {
+const fetchCustomer = onMounted(() => {
   appAxios.get("/users/customers").then((res) => {
     userList.value = res?.data || [];
   });
-};
+});
+
+onMounted(() => {
+  fetchCustomer();
+});
 
 provide("fetchCustomer", fetchCustomer);
 
@@ -30,8 +33,6 @@ const groupFilter = (customerGroupName) => {
     userList.value = res?.data || [];
   });
 };
-
-fetchCustomer();
 </script>
 
 <template>
@@ -41,16 +42,7 @@ fetchCustomer();
   <div class="link">
     <CustomerAdd @customer-add="fetchCustomer" />
     <div class="card-header">
-      <CustomerCard
-        v-for="user in userList"
-        :key="user._id"
-        :user="user"
-        class="p-grid"
-        @customer-update-delete="
-          fetchCustomer();
-          groupFilter();
-        "
-      />
+      <CustomerCard v-for="user in userList" :key="user._id" :user="user" />
     </div>
   </div>
 </template>

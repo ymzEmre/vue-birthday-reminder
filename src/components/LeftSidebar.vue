@@ -1,6 +1,5 @@
 <script setup>
-import { reactive, ref } from "@vue/reactivity";
-import { inject, onMounted } from "@vue/runtime-core";
+import { inject, onMounted, reactive, ref } from "@vue/runtime-core";
 
 const appAxios = inject("appAxios");
 
