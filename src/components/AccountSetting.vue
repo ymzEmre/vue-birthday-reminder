@@ -1,6 +1,5 @@
 <script setup>
-import { reactive } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
+import { inject, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 const useToast = inject("useToast");

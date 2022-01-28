@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps } from "@vue/runtime-core";
 import customerUpdate from "@/composables/customerUpdate";
 
 defineProps({
