@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps } from "vue";
 import { inject } from "@vue/runtime-core";
 import { useConfirm } from "primevue/useconfirm";
 
@@ -10,16 +10,16 @@ defineProps({
   },
 });
 
+const fetchCustomer = inject("fetchCustomer");
+
 const appAxios = inject("appAxios");
 const useToast = inject("useToast");
 const toast = useToast();
 const confirm = useConfirm();
 
-const emit = defineEmits(["customer-update-delete"]);
-
 const deleteUser = (id) => {
   appAxios.delete(`/customers/${id}`).then(() => {
-    emit("customer-update-delete");
+    fetchCustomer();
   });
 };
 

@@ -1,4 +1,3 @@
-// import { defineEmits } from "vue";
 import { useToast } from "primevue/usetoast";
 import moment from "moment";
 import { reactive } from "@vue/reactivity";
@@ -11,6 +10,8 @@ export default function () {
   const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
 
   const toast = useToast();
+
+  const fetchCustomer = inject("fetchCustomer");
 
   const appAxios = inject("appAxios");
 
@@ -56,7 +57,6 @@ export default function () {
   };
 
   return {
-    // emit,
     displayModal,
     selectedCity,
     cities,
@@ -64,5 +64,6 @@ export default function () {
     openModal,
     closeModal,
     updateUser,
+    fetchCustomer,
   };
 }

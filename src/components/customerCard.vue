@@ -14,8 +14,6 @@ defineProps({
     type: Array,
     default: () => [],
   },
-
-  fetchCustomer: Function,
 });
 
 const remainingDay = (birth) => {
@@ -32,8 +30,8 @@ const remainingDay = (birth) => {
     <template #title>
       <div class="customer-header">
         <p class="p-m-0">{{ user.name }}</p>
-        <CustomerUpdate :userList="userList" :user="user" @customer-update-delete="$emit('customer-update-delete')" />
-        <CustomerDelete :userList="userList" :user="user" @customer-update-delete="$emit('customer-update-delete')" />
+        <CustomerUpdate :userList="userList" :user="user" />
+        <CustomerDelete :userList="userList" :user="user" />
       </div>
 
       <div>

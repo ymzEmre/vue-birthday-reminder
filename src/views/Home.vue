@@ -1,5 +1,5 @@
 <script setup>
-import { inject } from "@vue/runtime-core";
+import { inject, provide } from "@vue/runtime-core";
 import { ref } from "@vue/reactivity";
 import LeftSidebar from "@/components/LeftSidebar";
 import TopSidebar from "@/components/TopSidebar";
@@ -15,6 +15,8 @@ const fetchCustomer = () => {
     userList.value = res?.data || [];
   });
 };
+
+provide("fetchCustomer", fetchCustomer);
 
 const groupFilter = (customerGroupName) => {
   if (customerGroupName != null) {
