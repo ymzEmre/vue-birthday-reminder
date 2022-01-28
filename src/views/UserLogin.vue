@@ -115,10 +115,13 @@ const forgottenPassword = async () => {
 </template>
 
 <style lang="scss">
+body {
+  background: url("../assets/images/login-bg.jpg") no-repeat center center fixed;
+}
 .form-section {
   padding: 2em;
   border-radius: 20px;
-  background: linear-gradient(to right, #e0e0e0, #c4c4c4);
+  backdrop-filter: blur(100px);
 }
 .wrapper {
   height: 100vh;

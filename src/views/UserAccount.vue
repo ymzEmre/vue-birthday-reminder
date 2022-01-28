@@ -7,7 +7,7 @@ import TopSidebar from "@/components/TopSidebar";
 <template>
   <TopSidebar />
   <Toast />
-  <div class="link">
+  <div class="link user-account">
     <AccountSetting />
     <ReminderSetting />
   </div>
@@ -16,5 +16,11 @@ import TopSidebar from "@/components/TopSidebar";
 <style lang="scss">
 .link {
   margin-top: $margin-top;
+}
+
+.user-account {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: unset !important;
 }
 </style>
