@@ -48,6 +48,9 @@ const groupFilter = (customerGroupName) => {
 </template>
 
 <style lang="scss">
+body {
+  background: unset;
+}
 .link {
   margin-top: $margin-top;
   margin-left: $margin-left;

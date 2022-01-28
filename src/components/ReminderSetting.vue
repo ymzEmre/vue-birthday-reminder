@@ -71,42 +71,49 @@ const reminderStatus = async () => {
 </script>
 
 <template>
-  <h4>Reminder Settings</h4>
-  <div class="reminder-status p-mt-5">
-    <InputSwitch v-model="checked" @change="reminderStatus" />
-    <span class="p-ml-3" v-text="reminder()"></span>
-  </div>
-  <div class="reminder-settings p-mt-3">
-    <div class="field col-12 md:col-3">
-      <InputNumber
+  <div class="p-field p-col-12 p-md-4 form-section">
+    <h4>Reminder Settings</h4>
+    <div class="reminder-status p-mt-5">
+      <InputSwitch v-model="checked" @change="reminderStatus" />
+      <span class="p-ml-3" v-text="reminder()"></span>
+    </div>
+    <div class="reminder-settings p-mt-3">
+      <div class="field col-12 md:col-3">
+        <InputNumber
+          class="p-mr-3"
+          id="minmax-buttons"
+          v-model="reminderSettings.reminderValue"
+          mode="decimal"
+          showButtons
+          :min="0"
+          :max="max"
+          :disabled="!checked"
+        />
+      </div>
+      <Dropdown
         class="p-mr-3"
-        id="minmax-buttons"
-        v-model="reminderSettings.reminderValue"
-        mode="decimal"
-        showButtons
-        :min="0"
-        :max="max"
+        v-model="selectedCity"
+        @input="reminderSettings.reminderType"
+        :options="cities"
+        optionLabel="name"
+        dataKey="code"
+        optionValue="code"
+        placeholder="Select a City"
+        @change="listboxChange"
         :disabled="!checked"
       />
-    </div>
-    <Dropdown
-      class="p-mr-3"
-      v-model="selectedCity"
-      @input="reminderSettings.reminderType"
-      :options="cities"
-      optionLabel="name"
-      dataKey="code"
-      optionValue="code"
-      placeholder="Select a City"
-      @change="listboxChange"
-      :disabled="!checked"
-    />
 
-    <Button label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!checked" />
+      <Button label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!checked" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
+.form-section {
+  padding: 2em;
+  border-radius: 20px;
+  background: linear-gradient(to right, #e0e0e0, #c4c4c4);
+}
 .button {
   display: block;
 }

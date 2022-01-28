@@ -48,10 +48,16 @@ const remainingDay = (birth) => {
 
 <style lang="scss">
 .p-card {
-  background-color: #ebebeb;
+  background-color: #f5f5f5;
   width: 18rem;
   margin: 0rem 0rem 2rem 1.5rem;
   height: 15rem;
+  color: #000;
+}
+
+.p-tag.p-tag-warning {
+  background-color: #36559e;
+  color: #ffffff;
 }
 
 .customer-header {
