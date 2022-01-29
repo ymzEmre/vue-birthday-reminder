@@ -72,10 +72,10 @@ const reminderStatus = async () => {
 
 <template>
   <div class="p-field p-col-12 p-md-4 form-section">
-    <h4>Reminder Settings</h4>
+    <h4 class="title">Reminder Settings</h4>
     <div class="reminder-status p-mt-5">
       <InputSwitch v-model="checked" @change="reminderStatus" />
-      <span class="p-ml-3" v-text="reminder()"></span>
+      <span class="p-ml-3 title" v-text="reminder()"></span>
     </div>
     <div class="reminder-settings p-mt-3">
       <div class="field col-12 md:col-3">
@@ -109,6 +109,9 @@ const reminderStatus = async () => {
 </template>
 
 <style lang="scss">
+.title {
+  color: #fff;
+}
 .button {
   display: block;
 }

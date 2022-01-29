@@ -54,7 +54,7 @@ const remainingDay = (birth) => {
   color: #fff;
   backdrop-filter: blur(15px);
   background: unset;
-  box-shadow: 0px 0px 8px 2px #6e6e6e;
+  box-shadow: 0px 0px 3px 2px #ffffff78;
   border-radius: 8px;
 }
 
