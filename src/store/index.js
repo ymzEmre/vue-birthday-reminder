@@ -14,7 +14,7 @@ export default createStore({
     },
   },
   getters: {
-    _isAuthenticated: (state) => state.user != null,
+    _isAuthenticated: (state) => state.user !== null,
 
     _getCurrentUser(state) {
       return state.user;
