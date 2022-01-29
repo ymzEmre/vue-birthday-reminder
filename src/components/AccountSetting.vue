@@ -46,7 +46,7 @@ const updateUser = async () => {
 
 <template>
   <div class="p-field p-col-12 p-md-4 form-section">
-    <h4>Account Settings</h4>
+    <h4 class="title">Account Settings</h4>
     <div class="p-inputgroup p-mt-3">
       <span class="p-inputgroup-addon">
         <i class="pi pi-user"></i>
@@ -79,11 +79,9 @@ const updateUser = async () => {
 </template>
 
 <style lang="scss">
-// .form-section {
-//   padding: 2em;
-//   border-radius: 20px;
-//   backdrop-filter: blur(100px);
-// }
+.title {
+  color: #fff;
+}
 .p-dropdown {
   width: 14rem;
 }

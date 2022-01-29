@@ -41,6 +41,7 @@ const goHome = () => {
   background: transparent;
   color: #fff;
   box-shadow: 0px 0px 6px 0px #ffffff;
+  backdrop-filter: blur(10px);
 }
 
 .p-sidebar-top-content {

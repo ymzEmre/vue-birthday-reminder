@@ -32,6 +32,7 @@ body {
 .form-section {
   padding: 2em;
   border-radius: 20px;
-  backdrop-filter: blur(100px);
+  backdrop-filter: blur(15px);
+  box-shadow: 0px 0px 6px 1px #fff inset;
 }
 </style>
