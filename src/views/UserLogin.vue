@@ -123,7 +123,7 @@ body {
   padding: 2em;
   border-radius: 20px;
   backdrop-filter: blur(20px);
-  box-shadow: 0px 0px 8px 2px #fff;
+  box-shadow: 0px 0px 8px 1px #fff;
 }
 .wrapper {
   height: 100vh;

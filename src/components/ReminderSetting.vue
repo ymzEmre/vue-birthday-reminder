@@ -2,14 +2,14 @@
 import { inject, onMounted, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
+const store = useStore();
+const appAxios = inject("appAxios");
 const useToast = inject("useToast");
 const toast = useToast();
 
-const store = useStore();
-const appAxios = inject("appAxios");
-
 const checked = ref();
 const selectedCity = ref();
+
 const cities = reactive([
   { name: "Hour", code: "Hour" },
   { name: "Day", code: "Day" },
