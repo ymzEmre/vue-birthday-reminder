@@ -1,0 +1,32 @@
+.p-button-success {
+  background: $color-default;
+  border: 1px solid $color-default;
+  transition: background 0.3s ease-in-out;
+}
+
+.button-default {
+  background: $color-default;
+  border: none;
+  transition: background 0.3s ease-in-out;
+}
+
+.button-default:hover {
+  background: $color-default-hover;
+}
+
+.p-button-success:hover {
+  background: $color-default-hover;
+}
+.button-default:focus,
+.p-button-success {
+  box-shadow: none;
+}
+
+.p-button.p-button-success:enabled:focus {
+  box-shadow: none;
+}
+
+.save-button {
+  display: flex;
+  justify-content: flex-end;
+}

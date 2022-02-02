@@ -82,16 +82,6 @@ const updateUser = async () => {
 
 <style lang="scss">
 .title {
-  color: #fff;
-}
-.p-dropdown {
-  width: 14rem;
-}
-
-.country-item {
-  img {
-    width: 17px;
-    margin-right: 0.5rem;
-  }
+  color: $color-white;
 }
 </style>

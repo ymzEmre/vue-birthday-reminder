@@ -1,0 +1,11 @@
+.p-dialog {
+  box-shadow: $box-shadow;
+}
+
+.p-dialog-header,
+.p-dialog-content,
+.p-dialog-footer {
+  background: $background-transparent;
+  color: $color-white;
+  backdrop-filter: $background-blur;
+}

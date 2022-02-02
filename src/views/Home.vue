@@ -49,9 +49,10 @@ const groupFilter = (customerGroupName) => {
 
 <style lang="scss">
 body {
-  background: url("../assets/images/login-bg.jpg") center no-repeat;
-  background-size: cover;
-  height: 100vh;
+  background: $background-image;
+  background-size: $background-size;
+  background-position: $background-position;
+  height: 100%;
 }
 .link {
   margin-top: $margin-top;

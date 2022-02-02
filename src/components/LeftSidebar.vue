@@ -49,11 +49,6 @@ onMounted(() => {
   z-index: 0 !important;
   background: transparent;
   color: #fff;
-  box-shadow: 0px 0px 6px 0px #ffffff;
-  box-shadow: 0px 3px 6px 0px #ffffff;
-}
-
-.sidebar-content {
-  // margin-top: 80px;
+  box-shadow: $box-shadow;
 }
 </style>

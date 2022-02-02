@@ -15,8 +15,9 @@ import TopSidebar from "@/components/TopSidebar";
 
 <style lang="scss">
 body {
-  background: url("../assets/images/login-bg.jpg") center no-repeat;
-  background-size: cover;
+  background: $background-image;
+  background-size: $background-size;
+  background-position: $background-position;
 }
 .link {
   margin-top: $margin-top;
@@ -31,8 +32,8 @@ body {
 
 .form-section {
   padding: 2em 3em;
-  border-radius: 20px;
+  border-radius: $border-radius-lg;
   backdrop-filter: blur(15px);
-  box-shadow: 0px 0px 6px 1px #fff;
+  box-shadow: $box-shadow;
 }
 </style>

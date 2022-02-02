@@ -29,7 +29,7 @@ const goHome = () => {
     <div class="p-sidebar-top-content">
       <h3>{{ currentUserName }}</h3>
       <p class="p-ml-4" @click="accountRoute">Account</p>
-      <Button class="button-other p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
+      <Button class="button-default p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
     </div>
     <!-- </div> -->
   </Sidebar>
@@ -40,7 +40,7 @@ const goHome = () => {
   height: 5rem !important;
   background: transparent;
   color: #fff;
-  box-shadow: 0px 0px 6px 0px #ffffff;
+  box-shadow: $box-shadow;
   backdrop-filter: blur(10px);
 }
 

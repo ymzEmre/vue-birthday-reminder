@@ -1,1 +1,17 @@
-@import '_layout.scss';
+// abstracts
+@import "abstracts/_variables";
+
+// base
+@import "base/font";
+@import "base/typography";
+
+// components
+@import "components/_prime-accordion";
+@import "components/_prime-buttons";
+@import "components/_prime-confirm-popup";
+@import "components/_prime-dropdown";
+@import "components/_prime-inputs";
+@import "components/_prime-label";
+@import "components/_prime-listbox";
+@import "components/_prime-modal";
+@import "components/_prime-tag";
