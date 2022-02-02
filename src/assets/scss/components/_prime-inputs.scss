@@ -1,0 +1,30 @@
+// input-switch
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: $color-default;
+}
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+  background: $color-default;
+}
+
+// input-text
+.p-inputtext {
+  background: transparent;
+  color: $color-white;
+  transition: border 0.3s ease-in-out;
+}
+
+.p-inputtext:focus {
+  border: 1px solid $color-default;
+  box-shadow: none !important;
+  // outline: none !important;
+}
+
+.p-inputtext:hover {
+  border: 1px solid $color-default;
+}
+
+// input-number
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-button.p-inputnumber-button {
+  background: $color-default;
+  border: none;
+}

@@ -51,16 +51,16 @@ const remainingDay = (birth) => {
   width: 18rem;
   margin: 0rem 0rem 2rem 1.5rem;
   height: 15rem;
-  color: #fff;
-  backdrop-filter: blur(15px);
+  color: $color-white;
+  backdrop-filter: $background-blur;
   background: unset;
-  box-shadow: 0px 0px 8px 3px #ffffff78;
-  border-radius: 8px;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius-sm;
 }
 
 .customer-header {
   display: grid;
   grid-template-columns: 6fr 0fr 0fr;
-  margin-bottom: -10px;
+  grid-template-rows: 0px 30px;
 }
 </style>

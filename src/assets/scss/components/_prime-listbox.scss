@@ -1,0 +1,21 @@
+.p-listbox {
+  background: transparent;
+}
+
+.p-listbox .p-listbox-list .p-listbox-item.p-highlight {
+  color: $color-white;
+  background: $color-default;
+}
+.p-inputgroup-addon {
+  color: $color-white;
+  background: $color-default;
+}
+
+.p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled):hover {
+  color: $color-white;
+  background: $color-default;
+}
+
+.p-listbox .p-listbox-list .p-listbox-item {
+  color: $color-white;
+}

@@ -85,14 +85,16 @@ const onSave = () => {
 }
 
 .p-accordion-header-link {
-  background: transparent !important;
+  background: $background-transparent;
+  box-shadow: $box-shadow;
   border: none !important;
-  color: #fff !important;
-  box-shadow: 0px 0px 3px 2px #ffffff78;
+  color: $color-white;
 }
 
 .p-accordion .p-accordion-tab:last-child .p-accordion-content {
   background: transparent;
-  backdrop-filter: blur(10px);
+  box-shadow: $box-shadow-inset;
+  backdrop-filter: $background-blur;
+  border: none;
 }
 </style>
