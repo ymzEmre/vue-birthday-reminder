@@ -47,8 +47,7 @@ const reminderSave = () => {
       });
       toast.add({ severity: "success", summary: "Reminder settings save", life: 3000 });
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       toast.add({ severity: "error", summary: "Reminder settings save failed", life: 3000 });
     });
 };
@@ -59,13 +58,15 @@ const reminderStatus = async () => {
   await appAxios
     .patch("/users/reminder-settings", { reminder_status: checked.value })
     .then(() => {
+      toast.add({ severity: "success", summary: "Reminder settings save", life: 3000 });
+
       store.commit("setUser", {
         ...store.getters._getCurrentUser,
         reminder_status: checked.value,
       });
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
+      toast.add({ severity: "error", summary: "Reminder settings save failed", life: 3000 });
     });
 };
 </script>
