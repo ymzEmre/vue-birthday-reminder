@@ -49,7 +49,9 @@ const onSave = () => {
 
         <label for="date">Group</label>
         <Listbox class="p-mt-2" v-model="selectedGroup" @input="state.customer.group" :options="state.groups" optionLabel="name" />
-        <Button class="p-button-success form-button-save" icon="pi pi-check" label="Save" @click="onSave"></Button>
+        <div class="save-button">
+          <Button class="p-button-success form-button-save" icon="pi pi-check" label="Save" @click="onSave"></Button>
+        </div>
       </AccordionTab>
     </Accordion>
   </div>
@@ -87,5 +89,10 @@ const onSave = () => {
   border: none !important;
   color: #fff !important;
   box-shadow: 0px 0px 3px 2px #ffffff78;
+}
+
+.p-accordion .p-accordion-tab:last-child .p-accordion-content {
+  background: transparent;
+  backdrop-filter: blur(10px);
 }
 </style>

@@ -29,7 +29,7 @@ const goHome = () => {
     <div class="p-sidebar-top-content">
       <h3>{{ currentUserName }}</h3>
       <p class="p-ml-4" @click="accountRoute">Account</p>
-      <Button class="p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
+      <Button class="button-other p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
     </div>
     <!-- </div> -->
   </Sidebar>

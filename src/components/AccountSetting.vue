@@ -47,7 +47,7 @@ const updateUser = async () => {
 <template>
   <div class="p-field p-col-12 p-md-4 form-section">
     <h4 class="title">Account Settings</h4>
-    <div class="p-inputgroup p-mt-3">
+    <div class="p-inputgroup p-mt-6">
       <span class="p-inputgroup-addon">
         <i class="pi pi-user"></i>
       </span>
@@ -74,7 +74,9 @@ const updateUser = async () => {
         <label for="inputgroup">New password</label>
       </span>
     </div>
-    <Button class="p-mt-3" label="Save" icon="pi pi-check" autofocus @click="updateUser" />
+    <div class="save-button">
+      <Button class="p-button-success p-mt-5 p-mb-3" label="Save" icon="pi pi-check" autofocus @click="updateUser" />
+    </div>
   </div>
 </template>
 
