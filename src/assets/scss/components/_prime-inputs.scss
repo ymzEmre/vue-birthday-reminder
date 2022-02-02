@@ -13,10 +13,13 @@
   transition: border 0.3s ease-in-out;
 }
 
+.p-field {
+  width: 100%;
+}
+
 .p-inputtext:focus {
   border: 1px solid $color-default;
   box-shadow: none !important;
-  // outline: none !important;
 }
 
 .p-inputtext:hover {
@@ -27,4 +30,9 @@
 .p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-button.p-inputnumber-button {
   background: $color-default;
   border: none;
+}
+
+.p-field {
+  margin-bottom: 1rem;
+  width: 100%;
 }

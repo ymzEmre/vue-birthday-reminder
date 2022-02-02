@@ -59,7 +59,7 @@ const login = async () => {
 <template>
   <Toast />
   <Button class="p-button-secondary" label="Sign Up" icon="pi pi-user-plus" @click="openModal" />
-  <Dialog header="Sign Up" v-model:visible="displayModal" :style="{ width: '50vw' }" :modal="true">
+  <Dialog header="Sign Up" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
     <div class="p-field p-col-12 p-md-4 wrapper">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">

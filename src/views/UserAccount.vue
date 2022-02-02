@@ -35,5 +35,6 @@ body {
   border-radius: $border-radius-lg;
   backdrop-filter: blur(15px);
   box-shadow: $box-shadow;
+  max-width: 600px;
 }
 </style>

@@ -9,3 +9,7 @@
   color: $color-white;
   backdrop-filter: $background-blur;
 }
+
+.p-dialog .p-dialog-content {
+  padding: 2em 1.5rem 2rem 1.5rem;
+}

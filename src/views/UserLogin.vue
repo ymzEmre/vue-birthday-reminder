@@ -86,16 +86,17 @@ const forgottenPassword = async () => {
         </div>
         <div class="p-mt-5 form-footer">
           <Button class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" @click="login" />
+          <p @click="openModal">Forgot password ?</p>
+
           <div>
             <UserRegister />
-            <p @click="openModal">Forgot password?</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <Dialog header="Forgot Password?" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
+  <Dialog header="Forgot Password ?" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
     <div class="p-field p-col-12 p-md-4 wrapper">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
@@ -124,9 +125,7 @@ body {
   border-radius: $border-radius-lg;
   backdrop-filter: $background-blur;
   box-shadow: $box-shadow;
-}
-.wrapper {
-  height: 90vh;
+  color: $color-white;
 }
 
 .form-wrapper {
@@ -134,12 +133,15 @@ body {
   align-items: center;
   justify-content: space-evenly;
   width: 100vw;
+  height: 90vh;
 }
 
 .form-footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  justify-content: flex-start;
   width: 100%;
+  grid-template-columns: 0.4fr 1.4fr 0.3fr;
+  align-items: center;
 }
 
 .sign-in {
