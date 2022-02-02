@@ -73,37 +73,38 @@ const reminderStatus = async () => {
 <template>
   <div class="p-field p-col-12 p-md-4 form-section">
     <h4 class="title">Reminder Settings</h4>
-    <div class="reminder-status p-mt-5">
+    <div class="reminder-status p-mt-6">
       <InputSwitch v-model="checked" @change="reminderStatus" />
       <span class="p-ml-3 title" v-text="reminder()"></span>
     </div>
-    <div class="reminder-settings p-mt-3">
-      <div class="field col-12 md:col-3">
-        <InputNumber
-          class="p-mr-3"
-          id="minmax-buttons"
-          v-model="reminderSettings.reminderValue"
-          mode="decimal"
-          showButtons
-          :min="0"
-          :max="max"
+    <div class="reminder-settings p-mt-2">
+      <div class="field col-12 md:col-3 p-mt-6">
+        <Dropdown
+          class=""
+          v-model="selectedCity"
+          @input="reminderSettings.reminderType"
+          :options="cities"
+          optionLabel="name"
+          dataKey="code"
+          optionValue="code"
+          placeholder="Select a City"
+          @change="listboxChange"
           :disabled="!checked"
         />
       </div>
-      <Dropdown
-        class="p-mr-3"
-        v-model="selectedCity"
-        @input="reminderSettings.reminderType"
-        :options="cities"
-        optionLabel="name"
-        dataKey="code"
-        optionValue="code"
-        placeholder="Select a City"
-        @change="listboxChange"
+      <InputNumber
+        class="p-mt-6"
+        id="minmax-buttons"
+        v-model="reminderSettings.reminderValue"
+        mode="decimal"
+        showButtons
+        :min="0"
+        :max="max"
         :disabled="!checked"
       />
-
-      <Button label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!checked" />
+    </div>
+    <div class="save-button">
+      <Button class="p-button-success p-mt-5" label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!checked" />
     </div>
   </div>
 </template>
@@ -118,7 +119,7 @@ const reminderStatus = async () => {
 
 .reminder-settings {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .reminder-status {
