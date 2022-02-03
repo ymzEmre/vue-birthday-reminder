@@ -27,29 +27,31 @@ const listboxChange = () => {
   if (selectedCity.value == "Month") return (max.value = "12");
 };
 const reminderSettings = reactive({
-  reminderType: null,
+  reminderType: store.getters._getCurrentUser.reminder_type,
   reminderValue: store.getters._getCurrentUser.reminder_day,
 });
 
 const max = ref();
 
 const reminderSave = () => {
-  appAxios
-    .patch("/users/reminder-settings", {
-      reminder_type: selectedCity.value,
-      reminder_day: reminderSettings.reminderValue,
-    })
-    .then(() => {
-      store.commit("setUser", {
-        ...store.getters._getCurrentUser,
+  if (selectedCity.value != reminderSettings.reminderType || reminderSettings.reminderValue != store.getters._getCurrentUser.reminder_day) {
+    appAxios
+      .patch("/users/reminder-settings", {
         reminder_type: selectedCity.value,
         reminder_day: reminderSettings.reminderValue,
+      })
+      .then(() => {
+        store.commit("setUser", {
+          ...store.getters._getCurrentUser,
+          reminder_type: selectedCity.value,
+          reminder_day: reminderSettings.reminderValue,
+        });
+        toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
+      })
+      .catch(() => {
+        toast.add({ severity: "error", summary: "Reminder settings save", detail: "failed", life: 3000 });
       });
-      toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
-    })
-    .catch(() => {
-      toast.add({ severity: "error", summary: "Reminder settings save", detail: "failed", life: 3000 });
-    });
+  }
 };
 
 const reminder = () => (checked.value ? "Reminder On" : "Reminder Off");
