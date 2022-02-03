@@ -37,11 +37,10 @@ export default function () {
       .patch(`/customers/${updatedata.value._id}`, payload)
       .then(() => {
         displayModal.value = false;
-        toast.add({ severity: "success", summary: "Update successful", life: 3000 });
+        toast.add({ severity: "success", summary: "Update", detail: "successful", life: 3000 });
       })
-      .catch((error) => {
-        console.log(error);
-        toast.add({ severity: "error", summary: "Delete successful", life: 3000 });
+      .catch(() => {
+        toast.add({ severity: "error", summary: "Delete", detail: "failed", life: 3000 });
       });
   };
 

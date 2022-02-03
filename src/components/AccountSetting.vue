@@ -24,10 +24,10 @@ const updateUser = async () => {
         name,
         email,
       });
-      toast.add({ severity: "success", summary: "User update successful", life: 3000 });
+      toast.add({ severity: "success", summary: "User update", detail: "successful", life: 3000 });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "User update failed", life: 3000 });
+      toast.add({ severity: "error", summary: "User update", detail: "failed", life: 3000 });
     });
 
   if (updateUserState.password) {
@@ -35,10 +35,10 @@ const updateUser = async () => {
     await appAxios
       .post("/users/change-password", { password })
       .then(() => {
-        toast.add({ severity: "success", summary: "Password change successful", life: 3000 });
+        toast.add({ severity: "success", summary: "Password change", detail: "successful", life: 3000 });
       })
       .catch(() => {
-        toast.add({ severity: "error", summary: "Password change failed", life: 3000 });
+        toast.add({ severity: "error", summary: "Password change", detail: "failed", life: 3000 });
       });
   }
 };

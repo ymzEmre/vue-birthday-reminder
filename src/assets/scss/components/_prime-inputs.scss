@@ -17,13 +17,13 @@
   width: 100%;
 }
 
+.p-inputtext:hover {
+  border: 1px solid $color-default;
+}
+
 .p-inputtext:focus {
   border: 1px solid $color-default;
   box-shadow: none !important;
-}
-
-.p-inputtext:hover {
-  border: 1px solid $color-default;
 }
 
 // input-number

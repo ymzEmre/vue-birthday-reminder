@@ -10,13 +10,10 @@
   transition: background 0.3s ease-in-out;
 }
 
-.button-default:hover {
-  background: $color-default-hover;
-}
-
 .p-button-success:hover {
   background: $color-default-hover;
 }
+
 .button-default:focus,
 .p-button-success {
   box-shadow: none;
