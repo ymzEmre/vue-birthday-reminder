@@ -14,8 +14,11 @@ const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, u
 
 <template>
   <div>
-    <Button icon="pi pi-user-edit" class="p-button-info p-button-outlined" @click="openModal(user._id, user.name, user.birthday, user.group)"></Button>
-
+    <Button
+      icon="pi pi-user-edit"
+      class="p-button-info p-button-outlined"
+      @click="openModal(user._id, user.name, user.birthday, user.group)"
+    ></Button>
     <Dialog header="Update" v-model:visible="displayModal" :style="{ width: '20vw' }" :modal="true">
       <span class="p-float-label p-mt-4">
         <InputText id="username2" class="customer-name" type="text" v-model="updatedata.name" />

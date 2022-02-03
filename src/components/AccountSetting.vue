@@ -15,22 +15,24 @@ const updateUserState = reactive({
 });
 
 const updateUser = async () => {
-  const { name, email } = updateUserState;
-  await appAxios
-    .patch("/users", { name, email })
-    .then(() => {
-      store.commit("setUser", {
-        ...store.getters._getCurrentUser,
-        name,
-        email,
+  if (updateUserState.name != store.getters._getCurrentUser.name || updateUserState.email != store.getters._getCurrentUser.email) {
+    const { name, email } = updateUserState;
+    await appAxios
+      .patch("/users", { name, email })
+      .then(() => {
+        store.commit("setUser", {
+          ...store.getters._getCurrentUser,
+          name,
+          email,
+        });
+        toast.add({ severity: "success", summary: "User update", detail: "successful", life: 3000 });
+      })
+      .catch(() => {
+        toast.add({ severity: "error", summary: "User update", detail: "failed", life: 3000 });
       });
-      toast.add({ severity: "success", summary: "User update", detail: "successful", life: 3000 });
-    })
-    .catch(() => {
-      toast.add({ severity: "error", summary: "User update", detail: "failed", life: 3000 });
-    });
+  }
 
-  if (updateUserState.password) {
+  if (updateUserState.password != null) {
     const { password } = updateUserState;
     await appAxios
       .post("/users/change-password", { password })
