@@ -29,7 +29,7 @@ const remainingDay = (birth) => {
   <Card class="p-card">
     <template #title>
       <div class="customer-header">
-        <p class="p-m-0">{{ user.name }}</p>
+        <p class="username p-m-0">{{ user.name }}</p>
         <CustomerUpdate :userList="userList" :user="user" />
         <CustomerDelete :userList="userList" :user="user" />
       </div>
@@ -47,6 +47,13 @@ const remainingDay = (birth) => {
 </template>
 
 <style lang="scss">
+.username {
+  width: 170px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .p-card {
   width: 18rem;
   margin: 0rem 0rem 2rem 1.5rem;
@@ -61,6 +68,7 @@ const remainingDay = (birth) => {
 .customer-header {
   display: grid;
   grid-template-columns: 6fr 0fr 0fr;
-  grid-template-rows: 0px 30px;
+  grid-template-rows: 30px;
+  align-items: center;
 }
 </style>
