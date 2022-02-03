@@ -21,7 +21,7 @@ const login = async () => {
     .post("/users/login", user)
     .then((res) => {
       store.commit("setUser", res.data);
-      toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Logined", life: 3000 });
+      toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Login successful", life: 3000 });
 
       localStorage.setItem("access_token", res.data.tokens.access_token);
       setTimeout(() => {
@@ -29,7 +29,7 @@ const login = async () => {
       }, 1000);
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Login Failed", detail: "Record deleted", life: 3000 });
+      toast.add({ severity: "error", summary: "Login", detail: "failed", life: 3000 });
     });
 };
 
@@ -51,10 +51,10 @@ const forgottenPassword = async () => {
   await appAxios
     .post("users/reset-password", userEmail.value)
     .then(() => {
-      toast.add({ severity: "success", summary: "Password Sent", detail: "Check your email", life: 3000 });
+      toast.add({ severity: "success", summary: "New password sent", detail: "Check your email", life: 10000 });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Password Sent Failed", detail: "Record deleted", life: 3000 });
+      toast.add({ severity: "error", summary: "New password sent", detail: "Failed", life: 3000 });
     });
 };
 </script>

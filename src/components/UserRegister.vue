@@ -31,7 +31,7 @@ const registerUser = async () => {
       login();
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Register Failed", detail: "Registered", life: 3000 });
+      toast.add({ severity: "error", summary: "Sign Up", detail: "failed", life: 3000 });
     });
 };
 
@@ -44,14 +44,14 @@ const login = async () => {
     .post("/users/login", payload)
     .then((res) => {
       store.commit("setUser", res.data);
-      toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Logined", life: 3000 });
+      toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Login successful", life: 1000 });
       localStorage.setItem("access_token", res.data.tokens.access_token);
       setTimeout(() => {
         router.push({ name: "Home" });
       }, 1000);
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Login Failed", detail: "Record deleted", life: 3000 });
+      toast.add({ severity: "error", summary: "Login", detail: "failed", life: 3000 });
     });
 };
 </script>

@@ -45,10 +45,10 @@ const reminderSave = () => {
         reminder_type: selectedCity.value,
         reminder_day: reminderSettings.reminderValue,
       });
-      toast.add({ severity: "success", summary: "Reminder settings save", life: 3000 });
+      toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Reminder settings save failed", life: 3000 });
+      toast.add({ severity: "error", summary: "Reminder settings save", detail: "failed", life: 3000 });
     });
 };
 
@@ -58,7 +58,7 @@ const reminderStatus = async () => {
   await appAxios
     .patch("/users/reminder-settings", { reminder_status: checked.value })
     .then(() => {
-      toast.add({ severity: "success", summary: "Reminder settings save", life: 3000 });
+      toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
 
       store.commit("setUser", {
         ...store.getters._getCurrentUser,
@@ -66,7 +66,7 @@ const reminderStatus = async () => {
       });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Reminder settings save failed", life: 3000 });
+      toast.add({ severity: "error", summary: "Reminder settings save", detail: "failed", life: 3000 });
     });
 };
 </script>
