@@ -3,12 +3,12 @@ import store from "../store";
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: () => import("../views/UserLogin.vue"),
   },
   {
-    path: "/home",
+    path: "/",
     name: "Home",
     component: () => import("../views/Home.vue"),
   },
