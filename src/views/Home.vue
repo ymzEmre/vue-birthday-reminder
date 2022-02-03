@@ -9,11 +9,11 @@ const appAxios = inject("appAxios");
 
 const userList = ref([]);
 
-const fetchCustomer = onMounted(() => {
+const fetchCustomer = () => {
   appAxios.get("/users/customers").then((res) => {
     userList.value = res?.data || [];
   });
-});
+};
 
 onMounted(() => {
   fetchCustomer();
