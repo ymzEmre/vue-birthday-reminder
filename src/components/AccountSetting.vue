@@ -37,6 +37,7 @@ const updateUser = async () => {
     await appAxios
       .post("/users/change-password", { password })
       .then(() => {
+        updateUserState.password = null;
         toast.add({ severity: "success", summary: "Password change", detail: "successful", life: 3000 });
       })
       .catch(() => {
