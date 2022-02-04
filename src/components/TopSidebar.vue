@@ -24,11 +24,9 @@ const goHome = () => {
 
 <template>
   <Sidebar :visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <div>
-      <!-- <img src="../assets/icons/birthday.png" alt="" /> -->
-      <span @click="goHome">BirthDay</span>
-    </div>
     <div class="p-sidebar-top-content">
+      <img @click="goHome" src="../assets/icons/logo.png" alt="" />
+      <span @click="goHome">BIRTHDAY</span>
       <h3>{{ currentUserName }}</h3>
       <p class="p-ml-4" @click="accountRoute">Account</p>
       <Button class="button-default p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
@@ -45,11 +43,19 @@ const goHome = () => {
   backdrop-filter: blur(10px);
 }
 
+img {
+  width: 80%;
+}
+
 .p-sidebar-top-content {
-  display: flex;
-  justify-content: end;
+  display: grid;
   align-items: center;
-  margin-top: -21px;
+  grid-template-columns: 0.1fr 2fr 0fr 0fr 0.2fr;
+}
+
+.p-sidebar-top .p-sidebar-header {
+  padding: 0;
+  margin-top: 1em;
 }
 
 .p-sidebar-content {
