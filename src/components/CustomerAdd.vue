@@ -2,11 +2,12 @@
 import { inject, reactive, ref } from "@vue/runtime-core";
 import { defineEmits } from "vue";
 
+const emit = defineEmits(["customer-add"]);
+
 const appAxios = inject("appAxios");
+
 const useToast = inject("useToast");
 const toast = useToast();
-
-const emit = defineEmits(["customer-add"]);
 
 const selectedGroup = ref();
 
@@ -19,7 +20,7 @@ const state = reactive({
   groups: [{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }],
 });
 
-const onSave = () => {
+const save = () => {
   appAxios
     .post("/customers", { ...state.customer, group: selectedGroup.value.name })
     .then(() => {
@@ -41,16 +42,14 @@ const onSave = () => {
           <InputText id="username" class="customer-name" type="text" v-model="state.customer.name" />
           <label for="username">Username</label>
         </span>
-
         <div class="p-field p-col-12 customer-birthday">
           <label for="date">Date</label>
           <InputMask mask="9999/99/99" v-model="state.customer.birthday" placeholder="____/__/__" slotChar="yyyy/mm/dd" />
         </div>
-
         <label for="date">Group</label>
         <Listbox class="p-mt-2" v-model="selectedGroup" @input="state.customer.group" :options="state.groups" optionLabel="name" />
         <div class="save-button">
-          <Button class="p-button-success form-button-save" icon="pi pi-check" label="Save" @click="onSave"></Button>
+          <Button class="p-button-success form-button-save" icon="pi pi-check" label="Save" @click="save"></Button>
         </div>
       </AccordionTab>
     </Accordion>

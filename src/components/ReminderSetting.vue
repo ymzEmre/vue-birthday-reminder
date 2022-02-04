@@ -4,46 +4,47 @@ import { useStore } from "vuex";
 
 const store = useStore();
 const appAxios = inject("appAxios");
+
 const useToast = inject("useToast");
 const toast = useToast();
 
-const checked = ref();
-const selectedCity = ref();
+const reminderChecked = ref();
+const reminderType = ref();
+const reminderValueMax = ref();
 
-const cities = reactive([
+const reminderTypes = reactive([
   { name: "Hour", code: "Hour" },
   { name: "Day", code: "Day" },
   { name: "Month", code: "Month" },
 ]);
 
-onMounted(() => {
-  selectedCity.value = store.getters._getCurrentUser.reminder_type;
-  checked.value = store.getters._getCurrentUser.reminder_status;
-});
-
-const listboxChange = () => {
-  if (selectedCity.value == "Hour") return (max.value = "24");
-  if (selectedCity.value == "Day") return (max.value = "30");
-  if (selectedCity.value == "Month") return (max.value = "12");
-};
 const reminderSettings = reactive({
   reminderType: store.getters._getCurrentUser.reminder_type,
   reminderValue: store.getters._getCurrentUser.reminder_day,
 });
 
-const max = ref();
+onMounted(() => {
+  reminderType.value = store.getters._getCurrentUser.reminder_type;
+  reminderChecked.value = store.getters._getCurrentUser.reminder_status;
+});
+
+const listboxChange = () => {
+  if (reminderType.value == "Hour") return (reminderValueMax.value = "24");
+  if (reminderType.value == "Day") return (reminderValueMax.value = "30");
+  if (reminderType.value == "Month") return (reminderValueMax.value = "12");
+};
 
 const reminderSave = () => {
-  if (selectedCity.value != reminderSettings.reminderType || reminderSettings.reminderValue != store.getters._getCurrentUser.reminder_day) {
+  if (reminderType.value != reminderSettings.reminderType || reminderSettings.reminderValue != store.getters._getCurrentUser.reminder_day) {
     appAxios
       .patch("/users/reminder-settings", {
-        reminder_type: selectedCity.value,
+        reminder_type: reminderType.value,
         reminder_day: reminderSettings.reminderValue,
       })
       .then(() => {
         store.commit("setUser", {
           ...store.getters._getCurrentUser,
-          reminder_type: selectedCity.value,
+          reminder_type: reminderType.value,
           reminder_day: reminderSettings.reminderValue,
         });
         toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
@@ -54,17 +55,17 @@ const reminderSave = () => {
   }
 };
 
-const reminder = () => (checked.value ? "Reminder On" : "Reminder Off");
+const reminder = () => (reminderChecked.value ? "Reminder On" : "Reminder Off");
 
 const reminderStatus = async () => {
   await appAxios
-    .patch("/users/reminder-settings", { reminder_status: checked.value })
+    .patch("/users/reminder-settings", { reminder_status: reminderChecked.value })
     .then(() => {
       toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
 
       store.commit("setUser", {
         ...store.getters._getCurrentUser,
-        reminder_status: checked.value,
+        reminder_status: reminderChecked.value,
       });
     })
     .catch(() => {
@@ -77,22 +78,22 @@ const reminderStatus = async () => {
   <div class="p-field p-col-12 p-md-4 form-section">
     <h4 class="title">Reminder Settings</h4>
     <div class="reminder-status p-mt-6">
-      <InputSwitch v-model="checked" @change="reminderStatus" />
+      <InputSwitch v-model="reminderChecked" @change="reminderStatus" />
       <span class="p-ml-3 title" v-text="reminder()"></span>
     </div>
     <div class="reminder-settings p-mt-2">
       <div class="field col-12 md:col-3 p-mt-6">
         <Dropdown
           class=""
-          v-model="selectedCity"
+          v-model="reminderType"
           @input="reminderSettings.reminderType"
-          :options="cities"
+          :options="reminderTypes"
           optionLabel="name"
           dataKey="code"
           optionValue="code"
           placeholder="Select a City"
           @change="listboxChange"
-          :disabled="!checked"
+          :disabled="!reminderChecked"
         />
       </div>
       <InputNumber
@@ -102,12 +103,12 @@ const reminderStatus = async () => {
         mode="decimal"
         showButtons
         :min="0"
-        :max="max"
-        :disabled="!checked"
+        :max="reminderValueMax"
+        :disabled="!reminderChecked"
       />
     </div>
     <div class="save-button">
-      <Button class="p-button-success p-mt-5" label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!checked" />
+      <Button class="p-button-success p-mt-5" label="Save" icon="pi pi-check" autofocus @click="reminderSave" :disabled="!reminderChecked" />
     </div>
   </div>
 </template>

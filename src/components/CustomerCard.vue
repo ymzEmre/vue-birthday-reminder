@@ -20,8 +20,8 @@ const remainingDay = (birth) => {
   const today = moment();
   const birtday = moment(birth);
   const age = today.diff(birtday, "years");
-  const remainingDays = birtday.add(age + 1, "years").diff(today, "days");
-  return remainingDays;
+  const remainingDay = birtday.add(age + 1, "years").diff(today, "days");
+  return remainingDay;
 };
 </script>
 
@@ -33,7 +33,6 @@ const remainingDay = (birth) => {
         <CustomerUpdate :userList="userList" :user="user" />
         <CustomerDelete :userList="userList" :user="user" />
       </div>
-
       <div>
         <Tag class="p-mr-2" severity="warning">{{ user.group }}</Tag>
       </div>

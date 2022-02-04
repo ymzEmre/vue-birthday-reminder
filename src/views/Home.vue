@@ -9,17 +9,17 @@ const appAxios = inject("appAxios");
 
 const userList = ref([]);
 
-const fetchCustomer = () => {
+const fetchCustomers = () => {
   appAxios.get("/users/customers").then((res) => {
     userList.value = res?.data || [];
   });
 };
 
 onMounted(() => {
-  fetchCustomer();
+  fetchCustomers();
 });
 
-provide("fetchCustomer", fetchCustomer);
+provide("fetchCustomers", fetchCustomers);
 
 const groupFilter = (customerGroupName) => {
   if (customerGroupName != null) {
@@ -40,7 +40,7 @@ const groupFilter = (customerGroupName) => {
   <LeftSidebar @group-change="groupFilter" />
 
   <div class="link">
-    <CustomerAdd @customer-add="fetchCustomer" />
+    <CustomerAdd @customer-add="fetchCustomers" />
     <div class="card-header">
       <CustomerCard v-for="user in userList" :key="user._id" :user="user" />
     </div>

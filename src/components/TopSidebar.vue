@@ -5,13 +5,13 @@ import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
 
+const currentUserName = store.getters._getCurrentUser.name;
+
 const logOut = () => {
   router.push({ name: "Login" });
   localStorage.removeItem("access_token");
   store.commit("logOut");
 };
-
-const currentUserName = store.getters._getCurrentUser.name;
 
 const accountRoute = () => {
   router.push({ name: "Account" });
@@ -24,14 +24,15 @@ const goHome = () => {
 
 <template>
   <Sidebar :visible="true" :baseZIndex="1000" position="top" :modal="false" :showCloseIcon="false">
-    <!-- <div> -->
-    <span @click="goHome">LOGO</span>
+    <div>
+      <!-- <img src="../assets/icons/birthday.png" alt="" /> -->
+      <span @click="goHome">BirthDay</span>
+    </div>
     <div class="p-sidebar-top-content">
       <h3>{{ currentUserName }}</h3>
       <p class="p-ml-4" @click="accountRoute">Account</p>
       <Button class="button-default p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
     </div>
-    <!-- </div> -->
   </Sidebar>
 </template>
 

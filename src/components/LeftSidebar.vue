@@ -1,12 +1,12 @@
 <script setup>
-import { inject, onMounted, reactive, ref } from "@vue/runtime-core";
+import { inject, onMounted, reactive } from "@vue/runtime-core";
 
 const appAxios = inject("appAxios");
 
 let state = reactive({
   groups: {},
+  groupsCount: null,
 });
-const groupsCount = ref();
 
 onMounted(() => {
   appAxios.get("/users/customers").then((res) => {
@@ -20,7 +20,7 @@ onMounted(() => {
       return acc;
     }, {});
 
-    groupsCount.value = Object.values(groupCount).length;
+    state.groupsCount = Object.values(groupCount).length;
 
     state.groups = Object.keys(groupCount).map((key) => ({
       id: new Date().getTime(),
@@ -34,7 +34,7 @@ onMounted(() => {
 <template>
   <Sidebar class=".p-sidebar-left" :visible="true" :showCloseIcon="false" :dismissable="false" :modal="false">
     <div class="sidebar-content">
-      <b @click="$emit('group-change', null)">All Groups ({{ groupsCount }})</b>
+      <b @click="$emit('group-change', null)">All Groups ({{ state.groupsCount }})</b>
       <p v-for="customerGroups in state.groups" :key="customerGroups.id" @click="$emit('group-change', customerGroups.name)">
         <Tag class="p-mr-2" severity="warning">{{ customerGroups.name }}</Tag> ({{ customerGroups.count }})
       </p>
