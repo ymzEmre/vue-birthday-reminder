@@ -9,27 +9,27 @@ defineProps({
   },
 });
 
-const fetchCustomer = inject("fetchCustomer");
+const fetchCustomers = inject("fetchCustomers");
 
 const appAxios = inject("appAxios");
 const useToast = inject("useToast");
 const toast = useToast();
 const confirm = useConfirm();
 
-const deleteUser = (id) => {
+const deleteCustomer = (id) => {
   appAxios.delete(`/customers/${id}`).then(() => {
-    fetchCustomer();
+    fetchCustomers();
   });
 };
 
-const deleteUserPopup = (event, id) => {
+const deleteCustomerPopup = (event, id) => {
   confirm.require({
     target: event.currentTarget,
     message: "Do you want to delete this record?",
     icon: "pi pi-info-circle",
     acceptClass: "p-button-danger",
     accept: () => {
-      deleteUser(id);
+      deleteCustomer(id);
       toast.add({ severity: "success", summary: "Delete", detail: "successful", life: 3000 });
     },
   });
@@ -38,7 +38,7 @@ const deleteUserPopup = (event, id) => {
 
 <template>
   <div>
-    <Button @click="deleteUserPopup($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined p-ml-2"></Button>
+    <Button @click="deleteCustomerPopup($event, user._id)" icon="pi pi-times" class="p-button-danger p-button-outlined p-ml-2"></Button>
     <ConfirmPopup></ConfirmPopup>
   </div>
 </template>

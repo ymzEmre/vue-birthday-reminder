@@ -11,14 +11,20 @@ const appAxios = inject("appAxios");
 const useToast = inject("useToast");
 const toast = useToast();
 
-const user = reactive({
-  email: null,
-  password: null,
+const displayModal = ref(false);
+
+const state = reactive({
+  user: {
+    email: null,
+    password: null,
+  },
+
+  userEmail: null,
 });
 
 const login = async () => {
   await appAxios
-    .post("/users/login", user)
+    .post("/users/login", state.user)
     .then((res) => {
       store.commit("setUser", res.data);
       toast.add({ severity: "success", summary: `${res.data.name} Welcome`, detail: "Login successful", life: 3000 });
@@ -33,8 +39,6 @@ const login = async () => {
     });
 };
 
-const displayModal = ref(false);
-
 const openModal = () => {
   displayModal.value = true;
 };
@@ -43,13 +47,9 @@ const closeModal = () => {
   displayModal.value = false;
 };
 
-const userEmail = ref({
-  email: null,
-});
-
 const forgottenPassword = async () => {
   await appAxios
-    .post("users/reset-password", userEmail.value)
+    .post("users/reset-password", state.userEmail)
     .then(() => {
       toast.add({ severity: "success", summary: "New password sent", detail: "Check your email", life: 10000 });
     })
@@ -64,13 +64,13 @@ const forgottenPassword = async () => {
 
   <div class="p-d-flex wrapper">
     <div class="p-mr-2 p-as-center form-wrapper">
-      <div class="p-grid form-section">
+      <div class="p-grid form-login">
         <div class="p-inputgroup p-mt-3">
           <span class="p-inputgroup-addon">
             <i class="pi pi-user"></i>
           </span>
           <span class="p-float-label">
-            <InputText id="inputgroup" type="text" v-model="user.email" />
+            <InputText id="inputgroup" type="text" v-model="state.user.email" />
             <label for="inputgroup">E-Mail</label>
           </span>
         </div>
@@ -80,7 +80,7 @@ const forgottenPassword = async () => {
             <i class="pi pi-lock"></i>
           </span>
           <span class="p-float-label">
-            <Password v-model="user.password" toggleMask :feedback="false"></Password>
+            <Password v-model="state.user.password" toggleMask :feedback="false"></Password>
             <label for="inputgroup">Password</label>
           </span>
         </div>
@@ -103,7 +103,7 @@ const forgottenPassword = async () => {
           <i class="pi pi-user"></i>
         </span>
         <span class="p-float-label">
-          <InputText id="inputgroup" type="text" v-model="userEmail.email" />
+          <InputText id="inputgroup" type="text" v-model="state.userEmail" />
           <label for="inputgroup">E-Mail</label>
         </span>
       </div>
@@ -120,7 +120,7 @@ body {
   background: $background-image;
   background-size: $background-size;
 }
-.form-section {
+.form-login {
   padding: 2em;
   border-radius: $border-radius-lg;
   backdrop-filter: $background-blur;

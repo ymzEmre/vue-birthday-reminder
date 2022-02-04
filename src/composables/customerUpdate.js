@@ -1,26 +1,23 @@
+import { inject, reactive, ref } from "@vue/runtime-core";
 import { useToast } from "primevue/usetoast";
 import moment from "moment";
-import { reactive } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
-import { ref } from "@vue/reactivity";
 
 export default function () {
-  const displayModal = ref(false);
-  const selectedCity = ref();
-  const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
+  const appAxios = inject("appAxios");
+  const fetchCustomers = inject("fetchCustomers");
 
   const toast = useToast();
 
-  const fetchCustomer = inject("fetchCustomer");
-
-  const appAxios = inject("appAxios");
-
+  const displayModal = ref(false);
+  const selectedCity = ref();
   const updatedata = ref({
     name: null,
     group: null,
     birthday: null,
     _id: null,
   });
+
+  const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
 
   const closeModal = () => {
     displayModal.value = false;
@@ -63,6 +60,6 @@ export default function () {
     openModal,
     closeModal,
     updateUser,
-    fetchCustomer,
+    fetchCustomers,
   };
 }

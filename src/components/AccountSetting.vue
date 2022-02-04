@@ -2,21 +2,21 @@
 import { inject, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
-const useToast = inject("useToast");
-const toast = useToast();
-
 const store = useStore();
 const appAxios = inject("appAxios");
 
-const updateUserState = reactive({
+const useToast = inject("useToast");
+const toast = useToast();
+
+const user = reactive({
   name: store.getters._getCurrentUser.name,
   email: store.getters._getCurrentUser.email,
   password: null,
 });
 
-const updateUser = async () => {
-  if (updateUserState.name != store.getters._getCurrentUser.name || updateUserState.email != store.getters._getCurrentUser.email) {
-    const { name, email } = updateUserState;
+const update = async () => {
+  if (user.name != store.getters._getCurrentUser.name || user.email != store.getters._getCurrentUser.email) {
+    const { name, email } = user;
     await appAxios
       .patch("/users", { name, email })
       .then(() => {
@@ -32,12 +32,12 @@ const updateUser = async () => {
       });
   }
 
-  if (updateUserState.password != null) {
-    const { password } = updateUserState;
+  if (user.password != null) {
+    const { password } = user;
     await appAxios
       .post("/users/change-password", { password })
       .then(() => {
-        updateUserState.password = null;
+        user.password = null;
         toast.add({ severity: "success", summary: "Password change", detail: "successful", life: 3000 });
       })
       .catch(() => {
@@ -55,7 +55,7 @@ const updateUser = async () => {
         <i class="pi pi-user"></i>
       </span>
       <span class="p-float-label">
-        <InputText id="inputgroup" type="text" v-model="updateUserState.name" />
+        <InputText id="inputgroup" type="text" v-model="user.name" />
         <label for="inputgroup">name</label>
       </span>
     </div>
@@ -64,7 +64,7 @@ const updateUser = async () => {
         <i class="pi pi-envelope"></i>
       </span>
       <span class="p-float-label">
-        <InputText id="inputgroup2" type="text" v-model="updateUserState.email" />
+        <InputText id="inputgroup2" type="text" v-model="user.email" />
         <label for="inputgroup">E-Mail</label>
       </span>
     </div>
@@ -73,12 +73,12 @@ const updateUser = async () => {
         <i class="pi pi-lock"></i>
       </span>
       <span class="p-float-label">
-        <Password toggleMask v-model="updateUserState.password"></Password>
+        <Password toggleMask v-model="user.password"></Password>
         <label for="inputgroup">New password</label>
       </span>
     </div>
     <div class="save-button">
-      <Button class="p-button-success p-mt-5 p-mb-3" label="Save" icon="pi pi-check" autofocus @click="updateUser" />
+      <Button class="p-button-success p-mt-5 p-mb-3" label="Save" icon="pi pi-check" autofocus @click="update" />
     </div>
   </div>
 </template>

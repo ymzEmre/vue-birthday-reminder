@@ -9,7 +9,7 @@ defineProps({
   },
 });
 
-const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, updateUser, fetchCustomer } = customerUpdate();
+const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, updateUser, fetchCustomers } = customerUpdate();
 </script>
 
 <template>
@@ -41,7 +41,7 @@ const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, u
           icon="pi pi-check"
           @click="
             updateUser();
-            fetchCustomer();
+            fetchCustomers();
           "
           autofocus
         />
