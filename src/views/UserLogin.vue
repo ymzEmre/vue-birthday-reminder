@@ -86,7 +86,7 @@ const forgottenPassword = async () => {
         </div>
         <div class="p-mt-5 form-footer">
           <Button class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" @click="login" />
-          <p @click="openModal">Forgot password ?</p>
+          <p @click="openModal">Forgot password?</p>
 
           <div>
             <UserRegister />
@@ -96,7 +96,7 @@ const forgottenPassword = async () => {
     </div>
   </div>
 
-  <Dialog header="Forgot Password ?" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
+  <Dialog header="Forgot Password?" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
     <div class="p-field p-col-12 p-md-4 wrapper">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
