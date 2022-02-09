@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
 
-const currentUserName = store.getters._getCurrentUser.name;
+const username = store.getters._getCurrentUser.name;
 
 const logOut = () => {
   router.push({ name: "Login" });
@@ -27,7 +27,7 @@ const goHome = () => {
     <div class="p-sidebar-top-content">
       <img @click="goHome" src="../assets/icons/logo.png" alt="" />
       <span @click="goHome">BIRTHDAY</span>
-      <h3>{{ currentUserName }}</h3>
+      <h3 class="sidebar-username">{{ username }}</h3>
       <p class="p-ml-4" @click="accountRoute">Account</p>
       <Button class="button-default p-ml-4" label="Logout" icon="pi pi-sign-out" @click="logOut" />
     </div>
@@ -45,6 +45,10 @@ const goHome = () => {
 
 img {
   width: 80%;
+}
+
+.sidebar-username {
+  white-space: nowrap;
 }
 
 .p-sidebar-top-content {
