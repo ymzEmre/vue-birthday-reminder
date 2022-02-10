@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store";
 
 import appAxios from "@/utils/appAxios";
+import { useVuelidate } from "@vuelidate/core";
 
 import PrimeVue from "primevue/config";
 import "primevue/resources/themes/saga-blue/theme.css";
@@ -38,6 +39,7 @@ app.use(router);
 
 app.provide("appAxios", appAxios);
 app.provide("useToast", useToast);
+app.provide("useVuelidate", useVuelidate);
 
 app.use(PrimeVue);
 app.use(ConfirmationService);
