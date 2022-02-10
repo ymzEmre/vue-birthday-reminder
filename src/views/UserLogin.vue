@@ -3,6 +3,8 @@ import { inject, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import UserRegister from "@/components/UserRegister";
+import { email, required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 const store = useStore();
 const router = useRouter();
@@ -10,8 +12,6 @@ const router = useRouter();
 const appAxios = inject("appAxios");
 const useToast = inject("useToast");
 const toast = useToast();
-
-const displayModal = ref(false);
 
 const state = reactive({
   user: {
@@ -22,7 +22,19 @@ const state = reactive({
   userEmail: null,
 });
 
+const submitted = ref(false);
+const showMessage = ref(false);
+
+const rules = {
+  email: { required, email },
+  password: { required },
+};
+
+const v$ = useVuelidate(rules, state.user);
+
 const login = async () => {
+  showMessage.value = !showMessage.value;
+
   await appAxios
     .post("/users/login", state.user)
     .then((res) => {
@@ -38,6 +50,15 @@ const login = async () => {
       toast.add({ severity: "error", summary: "Login", detail: "failed", life: 3000 });
     });
 };
+const handleSubmit = (isFormValid) => {
+  console.log("isFormValid", isFormValid);
+  submitted.value = true;
+
+  if (!isFormValid) return;
+  login();
+};
+
+const displayModal = ref(false);
 
 const openModal = () => {
   displayModal.value = true;
@@ -65,33 +86,55 @@ const forgottenPassword = async () => {
   <div class="p-d-flex wrapper">
     <div class="p-mr-2 p-as-center form-wrapper">
       <div class="p-grid form-login">
-        <div class="p-inputgroup p-mt-3">
-          <span class="p-inputgroup-addon">
-            <i class="pi pi-user"></i>
-          </span>
-          <span class="p-float-label">
-            <InputText id="inputgroup" type="text" v-model="state.user.email" />
-            <label for="inputgroup">E-Mail</label>
-          </span>
-        </div>
-
-        <div class="p-inputgroup p-mt-5">
-          <span class="p-inputgroup-addon">
-            <i class="pi pi-lock"></i>
-          </span>
-          <span class="p-float-label">
-            <Password v-model="state.user.password" toggleMask :feedback="false"></Password>
-            <label for="inputgroup">Password</label>
-          </span>
-        </div>
-        <div class="p-mt-5 form-footer">
-          <Button class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" @click="login" />
-          <p @click="openModal">Forgot password?</p>
-
-          <div>
-            <UserRegister />
+        <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
+          <div class="p-inputgroup p-mt-3">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-user"></i>
+            </span>
+            <span class="p-float-label">
+              <InputText
+                id="email"
+                v-model="v$.email.$model"
+                :class="{ 'p-invalid': v$.email.$invalid && submitted }"
+                aria-describedby="email-error"
+              />
+              <label for="email" :class="{ 'p-error': v$.email.$invalid && submitted }">Email</label>
+            </span>
           </div>
-        </div>
+          <span v-if="v$.email.$error && submitted">
+            <span id="email-error" v-for="(error, index) of v$.email.$errors" :key="index">
+              <small class="p-error">{{ error.$message }}</small>
+            </span>
+          </span>
+          <small v-else-if="(v$.email.$invalid && submitted) || v$.email.$pending.$response" class="p-error">{{
+            v$.email.required.$message.replace("Value", "Email")
+          }}</small>
+          <div class="p-inputgroup p-mt-5">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-lock"></i>
+            </span>
+            <span class="p-float-label">
+              <Password
+                id="password"
+                :class="{ 'p-invalid': v$.password.$invalid && submitted }"
+                v-model="v$.password.$model"
+                toggleMask
+                :feedback="false"
+              ></Password>
+              <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">Password</label>
+            </span>
+          </div>
+          <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{
+            v$.password.required.$message.replace("Value", "Password")
+          }}</small>
+          <div class="p-mt-5 form-footer">
+            <Button type="submit" class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" />
+            <p @click="openModal">Forgot password?</p>
+            <div>
+              <UserRegister />
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -142,6 +185,7 @@ body {
   width: 100%;
   grid-template-columns: 0.4fr 1.4fr 0.3fr;
   align-items: center;
+  width: 700px;
 }
 
 .sign-in {
