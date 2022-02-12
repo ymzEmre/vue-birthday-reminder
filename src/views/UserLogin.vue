@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import { email, required, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import UserRegister from "@/components/UserRegister";
+import UserForgotPassword from "@/components/UserForgotPassword";
 
 const store = useStore();
 const router = useRouter();
@@ -58,27 +59,6 @@ const handleSubmit = (isFormValid) => {
 
   if (!isFormValid) return;
   login();
-};
-
-const displayModal = ref(false);
-
-const openModal = () => {
-  displayModal.value = true;
-};
-
-const closeModal = () => {
-  displayModal.value = false;
-};
-
-const forgottenPassword = async () => {
-  await appAxios
-    .post("users/reset-password", state.userEmail)
-    .then(() => {
-      toast.add({ severity: "success", summary: "New password sent", detail: "Check your email", life: 10000 });
-    })
-    .catch(() => {
-      toast.add({ severity: "error", summary: "New password send", detail: "Failed", life: 3000 });
-    });
 };
 </script>
 
@@ -136,8 +116,7 @@ const forgottenPassword = async () => {
           }}</small>
 
           <div class="p-mt-5 form-footer">
-            <Button type="submit" class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" />
-            <p class="p-ml-2" @click="openModal">Forgot password?</p>
+            <UserForgotPassword />
             <div>
               <UserRegister />
             </div>
@@ -146,24 +125,6 @@ const forgottenPassword = async () => {
       </div>
     </div>
   </div>
-
-  <Dialog header="Forgot Password?" v-model:visible="displayModal" :style="{ width: '25vw' }" :modal="true">
-    <div class="p-field p-col-12 p-md-4 wrapper">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon">
-          <i class="pi pi-user"></i>
-        </span>
-        <span class="p-float-label">
-          <InputText id="inputgroup" type="text" v-model="state.userEmail" />
-          <label for="inputgroup">E-Mail</label>
-        </span>
-      </div>
-    </div>
-    <template #footer>
-      <Button class="p-button-text" label="Cancel" icon="pi pi-times" @click="closeModal" />
-      <Button class="p-button-success" label="Ok" icon="pi pi-check" autofocus @click="forgottenPassword" />
-    </template>
-  </Dialog>
 </template>
 
 <style lang="scss">
