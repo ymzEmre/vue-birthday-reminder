@@ -1,15 +1,19 @@
-import { inject, reactive, ref } from "@vue/runtime-core";
+import { inject, reactive, ref, computed } from "@vue/runtime-core";
 import { useToast } from "primevue/usetoast";
 import moment from "moment";
+import { required, minLength } from "@vuelidate/validators";
 
 export default function () {
   const appAxios = inject("appAxios");
   const fetchCustomers = inject("fetchCustomers");
+  const useVuelidate = inject("useVuelidate");
 
   const toast = useToast();
 
   const displayModal = ref(false);
+
   const selectedCity = ref();
+
   const updatedata = ref({
     name: null,
     group: null,
@@ -19,11 +23,29 @@ export default function () {
 
   const cities = reactive([{ name: "Family" }, { name: "Friends" }, { name: "Work" }, { name: "Other" }]);
 
-  const closeModal = () => {
-    displayModal.value = false;
+  const submitted = ref(false);
+  const showMessage = ref(false);
+
+  const rules = computed(() => ({
+    name: { required, minLengthValue: minLength(3) },
+    birthday: { required },
+    group: { required },
+  }));
+
+  const v$ = useVuelidate(rules, updatedata, { $stopPropagation: true });
+
+  const handleSubmit = (isFormValid) => {
+    submitted.value = true;
+
+    if (!isFormValid) return;
+
+    updateUser();
+    fetchCustomers();
   };
 
   const updateUser = () => {
+    showMessage.value = !showMessage.value;
+
     const payload = {
       name: updatedata.value.name,
       group: selectedCity.value.name,
@@ -52,6 +74,10 @@ export default function () {
     selectedCity.value = { name: userGroup };
   };
 
+  const closeModal = () => {
+    displayModal.value = false;
+  };
+
   return {
     displayModal,
     selectedCity,
@@ -61,5 +87,8 @@ export default function () {
     closeModal,
     updateUser,
     fetchCustomers,
+    submitted,
+    v$,
+    handleSubmit,
   };
 }
