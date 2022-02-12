@@ -126,7 +126,6 @@ const forgottenPassword = async () => {
               <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">Password</label>
             </span>
           </div>
-
           <span v-if="v$.password.$error && submitted">
             <span id="password-error" v-for="(error, index) of v$.password.$errors" :key="index">
               <small class="p-error">{{ error.$message }}</small>

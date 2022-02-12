@@ -27,7 +27,10 @@ export default function () {
   const showMessage = ref(false);
 
   const rules = computed(() => ({
-    name: { required, minLengthValue: minLength(3) },
+    name: {
+      required,
+      minLengthValue: minLength(3),
+    },
     birthday: { required },
     group: { required },
   }));
