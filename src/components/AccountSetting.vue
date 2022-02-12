@@ -1,7 +1,7 @@
 <script setup>
 import { inject, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import { email, required } from "@vuelidate/validators";
+import { email, required, minLength } from "@vuelidate/validators";
 
 const store = useStore();
 
@@ -21,8 +21,15 @@ const submitted = ref(false);
 const showMessage = ref(false);
 
 const rules = {
-  name: { required },
+  name: {
+    required,
+    minLengthValue: minLength(3),
+  },
   email: { required, email },
+
+  password: {
+    minLengthValue: minLength(8),
+  },
 };
 
 const v$ = useVuelidate(rules, user);
@@ -82,6 +89,11 @@ const update = async () => {
           <label for="name" :class="{ 'p-error': v$.name.$invalid && submitted }">Name</label>
         </span>
       </div>
+      <span v-if="v$.name.$error && submitted">
+        <span id="email-error" v-for="(error, index) of v$.name.$errors" :key="index">
+          <small class="p-error">{{ error.$message }}</small>
+        </span>
+      </span>
       <small v-if="(v$.name.$invalid && submitted) || v$.name.$pending.$response" class="p-error">{{
         v$.name.required.$message.replace("Value", "Name")
       }}</small>
@@ -107,10 +119,24 @@ const update = async () => {
           <i class="pi pi-lock"></i>
         </span>
         <span class="p-float-label">
-          <Password toggleMask v-model="user.password"></Password>
-          <label for="inputgroup">New password</label>
+          <Password
+            id="password"
+            :class="{ 'p-invalid': v$.password.$invalid && submitted }"
+            v-model="v$.password.$model"
+            toggleMask
+            :feedback="false"
+          ></Password>
+          <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">Password</label>
         </span>
       </div>
+      <span v-if="v$.password.$error && submitted">
+        <span id="password-error" v-for="(error, index) of v$.password.$errors" :key="index">
+          <small class="p-error">{{ error.$message }}</small>
+        </span>
+      </span>
+      <small v-else-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{
+        v$.password.required.$message.replace("Value", "password")
+      }}</small>
       <div class="save-button">
         <Button type="submit" class="p-button-success p-mt-5 p-mb-3" label="Save" icon="pi pi-check" />
       </div>
