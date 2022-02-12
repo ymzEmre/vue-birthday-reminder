@@ -2,9 +2,9 @@
 import { inject, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import UserRegister from "@/components/UserRegister";
-import { email, required } from "@vuelidate/validators";
+import { email, required, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import UserRegister from "@/components/UserRegister";
 
 const store = useStore();
 const router = useRouter();
@@ -27,7 +27,10 @@ const showMessage = ref(false);
 
 const rules = {
   email: { required, email },
-  password: { required },
+  password: {
+    required,
+    minLengthValue: minLength(8),
+  },
 };
 
 const v$ = useVuelidate(rules, state.user);
@@ -51,7 +54,6 @@ const login = async () => {
     });
 };
 const handleSubmit = (isFormValid) => {
-  console.log("isFormValid", isFormValid);
   submitted.value = true;
 
   if (!isFormValid) return;
@@ -75,7 +77,7 @@ const forgottenPassword = async () => {
       toast.add({ severity: "success", summary: "New password sent", detail: "Check your email", life: 10000 });
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "New password sent", detail: "Failed", life: 3000 });
+      toast.add({ severity: "error", summary: "New password send", detail: "Failed", life: 3000 });
     });
 };
 </script>
@@ -124,12 +126,19 @@ const forgottenPassword = async () => {
               <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">Password</label>
             </span>
           </div>
+
+          <span v-if="v$.password.$error && submitted">
+            <span id="password-error" v-for="(error, index) of v$.password.$errors" :key="index">
+              <small class="p-error">{{ error.$message }}</small>
+            </span>
+          </span>
           <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{
             v$.password.required.$message.replace("Value", "Password")
           }}</small>
+
           <div class="p-mt-5 form-footer">
             <Button type="submit" class="p-button-success p-mr-3 sign-in" label="Sign In" icon="pi pi-sign-in" />
-            <p @click="openModal">Forgot password?</p>
+            <p class="p-ml-2" @click="openModal">Forgot password?</p>
             <div>
               <UserRegister />
             </div>
@@ -183,7 +192,7 @@ body {
   display: grid;
   justify-content: flex-start;
   width: 100%;
-  grid-template-columns: 0.4fr 1.4fr 0.3fr;
+  grid-template-columns: 0.4fr 1.4fr 0.4fr;
   align-items: center;
   width: 700px;
 }
