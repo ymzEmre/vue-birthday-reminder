@@ -28,7 +28,6 @@ const rules = {
 const v$ = useVuelidate(rules, user);
 
 const handleSubmit = (isFormValid) => {
-  console.log("isFormValid", isFormValid);
   submitted.value = true;
 
   if (!isFormValid) return;
