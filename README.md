@@ -1,29 +1,31 @@
-# reminder4
+## Installation
 
-## Project setup
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+npm install
 ```
 
-### Compiles and minifies for production
+## Usage
+
 ```
-yarn build
+npm start
 ```
 
-### Run your unit tests
-```
-yarn test:unit
-```
+## To Do
 
-### Lints and fixes files
-```
-yarn lint
-```
+#### User
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [x] sign-in
+- [x] sign-up
+- [x] reset-password
+- [x] update-password
+- [x] update-profile-information
+- [x] set-reminder-settings
+- [x] form validation
+- [ ] reminder-send-email
+
+#### Customer
+
+- [x] customer-add
+- [x] customer-update
+- [x] customer-delete
+- [x] customer-list
