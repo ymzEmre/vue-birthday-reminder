@@ -54,6 +54,7 @@ const update = async () => {
           name,
           email,
         });
+
         toast.add({ severity: "success", summary: "User update", detail: "successful", life: 3000 });
       })
       .catch(() => {
@@ -144,7 +145,7 @@ const update = async () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .title {
   color: $color-white;
 }

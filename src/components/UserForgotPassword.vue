@@ -63,8 +63,8 @@ const forgotPassword = async () => {
             <i class="pi pi-user"></i>
           </span>
           <span class="p-float-label">
-            <label for="email" :class="{ 'p-error': v$.email.$invalid && submitted }">Email</label>
             <InputText id="email" v-model="v$.email.$model" :class="{ 'p-invalid': v$.email.$invalid && submitted }" aria-describedby="email-error" />
+            <label for="email" :class="{ 'p-error': v$.email.$invalid && submitted }">Email</label>
           </span>
         </div>
         <span v-if="v$.email.$error && submitted">
