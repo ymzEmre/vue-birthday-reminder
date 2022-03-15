@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const appAxios = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://express-birthday-reminder.herokuapp.com",
 });
 
 appAxios.interceptors.request.use((config) => {
