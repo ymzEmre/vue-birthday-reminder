@@ -111,6 +111,7 @@ const save = () => {
 
 .add-new-accordion {
   width: 18rem;
+  backdrop-filter: blur(20px);
 }
 
 .customer-name {
