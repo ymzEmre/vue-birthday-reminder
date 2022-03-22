@@ -20,7 +20,7 @@ const reminderTypes = reactive([
 
 const reminderSettings = reactive({
   reminderType: store.getters._getCurrentUser.reminder_type,
-  reminderValue: store.getters._getCurrentUser.reminder_day,
+  reminderValue: store.getters._getCurrentUser.reminder_value,
 });
 
 onMounted(() => {
