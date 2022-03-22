@@ -1,3 +1,11 @@
+## Motivation
+
+I need an app where I can see all my friends' birthdays, group them and remind them of my friends' birthdays in advance. That's why I decided to make this app.
+
+I hope you will use it and it will be useful for you.
+
+---
+
 ## Installation
 
 ```
@@ -10,7 +18,20 @@ npm install
 npm start
 ```
 
+## Live Demo
+
+```
+email : test@test.com
+password : test1234
+```
+
+---
+
 ## To Do
+
+### General
+
+- [ ] Improve responsive design
 
 #### User
 
