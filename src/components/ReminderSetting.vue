@@ -35,18 +35,19 @@ const listboxChange = () => {
 };
 
 const reminderSave = () => {
-  if (reminderType.value != reminderSettings.reminderType || reminderSettings.reminderValue != store.getters._getCurrentUser.reminder_day) {
+  if (reminderType.value != reminderSettings.reminderType || reminderSettings.reminderValue) {
     appAxios
       .patch("/users/reminder-settings", {
         reminder_type: reminderType.value,
-        reminder_day: reminderSettings.reminderValue,
+        reminder_value: reminderSettings.reminderValue,
       })
       .then(() => {
         store.commit("setUser", {
           ...store.getters._getCurrentUser,
           reminder_type: reminderType.value,
-          reminder_day: reminderSettings.reminderValue,
+          reminder_value: reminderSettings.reminderValue,
         });
+
         toast.add({ severity: "success", summary: "Reminder settings save", detail: "successful", life: 3000 });
       })
       .catch(() => {
