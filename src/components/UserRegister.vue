@@ -49,7 +49,8 @@ const registerUser = async () => {
     .then(() => {
       login();
     })
-    .catch(() => {
+    .catch((e) => {
+      if (e.response.status == 409) return toast.add({ severity: "error", summary: "Register", detail: "Email address already exists", life: 3000 });
       toast.add({ severity: "error", summary: "Sign Up", detail: "failed", life: 3000 });
     });
 };
@@ -70,7 +71,7 @@ const login = async () => {
       }, 1000);
     })
     .catch(() => {
-      toast.add({ severity: "error", summary: "Login", detail: "failed", life: 3000 });
+      toast.add({ severity: "error", summary: "Login", detail: "Email address or password is incorrect", life: 3000 });
     });
 };
 
