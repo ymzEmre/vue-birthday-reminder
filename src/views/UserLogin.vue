@@ -50,8 +50,9 @@ const login = async () => {
         router.push({ name: "Home" });
       }, 1000);
     })
-    .catch(() => {
-      toast.add({ severity: "error", summary: "Login", detail: "failed", life: 3000 });
+    .catch((e) => {
+      if (e.response.status == 404)
+        return toast.add({ severity: "error", summary: "Login", detail: "Email address or password is incorrect", life: 3000 });
     });
 };
 const handleSubmit = (isFormValid) => {
