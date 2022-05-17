@@ -23,7 +23,7 @@ const submitted = ref(false);
 const showMessage = ref(false);
 
 const rules = computed(() => ({
-  name: { required },
+  name: { required, minLengthValue: minLength(3) },
   email: { required, email },
   password: {
     required,
