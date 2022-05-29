@@ -15,7 +15,7 @@ npm install
 ## Usage
 
 ```
-npm start
+npm serve
 ```
 
 ## Live Demo
