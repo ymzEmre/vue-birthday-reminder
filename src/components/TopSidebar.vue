@@ -54,7 +54,7 @@ img {
 .p-sidebar-top-content {
   display: grid;
   align-items: center;
-  grid-template-columns: 0.1fr 2fr 0fr 0fr 0.2fr;
+  grid-template-columns: 0.1fr 2fr 0fr 0fr 0.3fr;
 }
 
 .p-sidebar-top .p-sidebar-header {

@@ -16,7 +16,6 @@ import TopSidebar from "@/components/TopSidebar";
 <style lang="scss">
 body {
   background: $background-image;
-  background-size: $background-size;
   background-position: $background-position;
 }
 .link {
@@ -36,5 +35,11 @@ body {
   backdrop-filter: blur(15px);
   box-shadow: $box-shadow;
   max-width: 600px;
+}
+
+@media screen and (max-width: 1200px) {
+  .user-account {
+    flex-direction: column;
+  }
 }
 </style>

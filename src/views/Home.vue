@@ -52,7 +52,7 @@ body {
   background: $background-image;
   background-size: $background-size;
   background-position: $background-position;
-  height: 100%;
+  height: 100vh;
 }
 .link {
   margin-top: $margin-top;

@@ -41,9 +41,9 @@ const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, s
           }}</small>
         </div>
         <label for="group">Group</label>
-        <Listbox class="p-mt-2" v-model="selectedCity" @input="updatedata.group" :options="cities" optionLabel="name" style="width: 21rem" />
-        <div class="p-mt-6 modal-footer">
-          <Button label="Cancel" icon="pi pi-times" @click="closeModal" class="p-button-text" />
+        <Listbox class="p-mt-2" v-model="selectedCity" @input="updatedata.group" :options="cities" optionLabel="name" />
+        <div class="p-mt-5 modal-footer">
+          <Button label="Cancel" icon="pi pi-times" @click="closeModal" class="p-button-text button-cancel" />
           <Button type="submit" class="p-button-success" label="Update" icon="pi pi-check" />
         </div>
       </form>
@@ -69,6 +69,9 @@ const { displayModal, selectedCity, cities, updatedata, openModal, closeModal, s
   width: 100%;
 }
 
+.button-cancel {
+  margin-top: 15px;
+}
 .modal-footer {
   display: flex;
   justify-content: end;

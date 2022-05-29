@@ -76,7 +76,7 @@ const reminderStatus = async () => {
 </script>
 
 <template>
-  <div class="p-field p-col-12 p-md-4 form-section">
+  <div class="p-field p-col-12 p-md-6 form-section">
     <h4 class="title">Reminder Settings</h4>
     <div class="reminder-status p-mt-6">
       <InputSwitch v-model="reminderChecked" @change="reminderStatus" />
