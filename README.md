@@ -9,7 +9,7 @@ I hope you will use it and it will be useful for you.
 ## Installation
 
 ```
-npm install
+npm serve
 ```
 
 ## Usage
